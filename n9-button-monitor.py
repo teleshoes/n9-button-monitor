@@ -62,7 +62,7 @@ def monotonic_time():
   return t.tv_sec + t.tv_nsec * 1e-9
 
 ###############
-configFilePath = "/home/user/.config/n9-button-monitor.conf"
+configFilePath = "/home/user/.config/n9-button-monitor.ini"
 
 class Config():
   def __init__(self):
