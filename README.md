@@ -1,3 +1,5 @@
+[![Flattr Button](http://api.flattr.com/button/button-static-50x60.png "Flattr This!")](https://github.com/teleshoes/n9-button-monitor "N9 Button Monitor")
+````
 N9 Button Monitor 
 Copyright 2012 Elliot Wolk
 #####
@@ -28,4 +30,4 @@ python-pyside.qtcore
 
 3) open a terminal, and execute it as root like this:
 devel-su -c "develsh -c 'python /home/user/MyDocs/n9-button-monitor.py'"
-
+````
