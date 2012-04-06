@@ -30,4 +30,4 @@ python-pyside.qtcore
 
 3) open a terminal, and execute it as root like this:
 devel-su -c "develsh -c 'python /home/user/MyDocs/n9-button-monitor.py'"
-````
+```
