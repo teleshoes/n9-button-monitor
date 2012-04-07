@@ -16,6 +16,7 @@ CONF_DIR=/home/user/.config
 echo; echo COPYING EXEC TO $INSTALL_DIR
 mkdir -p $INSTALL_DIR
 cp start.sh $INSTALL_DIR
+cp stop.sh $INSTALL_DIR
 cp n9-button-monitor.py $INSTALL_DIR
 chmod +x $INSTALL_DIR/n9-button-monitor.py
 
