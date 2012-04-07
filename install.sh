@@ -23,7 +23,7 @@ cp n9-button-monitor.conf $UPSTART_DIR
 
 if [ -e $CONF_DIR/n9-button-monitor.ini ]; then
   echo; echo LEAVING EXISTING INI
-if [ -e $CONF_DIR/n9-button-monitor.conf ]; then
+elif [ -e $CONF_DIR/n9-button-monitor.conf ]; then
   echo; echo RENAMING n9-button-monitor.conf to n9-button-monitor.ini
   mv $CONF_DIR/n9-button-monitor.conf $CONF_DIR/n9-button-monitor.ini
 else
