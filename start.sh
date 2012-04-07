@@ -1,5 +1,6 @@
 #!/bin/sh
-if [ "$USER" != "root" ]; then
+u=`/usr/bin/whoami`
+if [ "$u" != "root" ]; then
   echo must be run as root
   exit 1
 fi
