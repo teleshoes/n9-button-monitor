@@ -10,7 +10,7 @@ apt-get install \
 ;
 
 INSTALL_DIR=/opt/n9-button-monitor
-UPSTART_DIR=/etc/init/apps
+UPSTART_DIR=/etc/init
 CONF_DIR=/home/user/.config
 
 echo; echo COPYING EXEC TO $INSTALL_DIR
