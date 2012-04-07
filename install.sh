@@ -1,3 +1,5 @@
+set -x
+
 apt-get install \
   xresponse \
   x11-utils \
