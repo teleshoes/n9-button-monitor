@@ -111,7 +111,7 @@ class Config():
       config = open(deprecatedConfigFilePath,"rb").read()
       print ("WARNING: config file should be '" + configFilePath + "'\n" +
              "{not '" + deprecatedConfigFilePath + "'}")
-    else
+    else:
       config = self.getDefaultConfig()
       print "WARNING: no config file at '" + configFilePath + "'"
       print "Using default config:\n" + config
