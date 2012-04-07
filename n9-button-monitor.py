@@ -63,6 +63,7 @@ def monotonic_time():
 
 ###############
 configFilePath = "/home/user/.config/n9-button-monitor.ini"
+deprecatedConfigFilePath = "/home/user/.config/n9-button-monitor.conf"
 
 class Config():
   def __init__(self):
@@ -103,13 +104,17 @@ class Config():
            + "$"
            )
     return re.compile(ptrn)
-  def parse(self, filePath):
-    if not os.path.isfile(filePath):
+  def parse(self):
+    if os.path.isfile(configFilePath):
+      config = open(configFilePath,"rb").read()
+    elif os.path.isfile(deprecatedConfigFilePath):
+      config = open(deprecatedConfigFilePath,"rb").read()
+      print ("WARNING: config file should be '" + configFilePath + "'\n" +
+             "{not '" + deprecatedConfigFilePath + "'}")
+    else
       config = self.getDefaultConfig()
-      print "WARNING: no config file at '" + filePath + "'"
+      print "WARNING: no config file at '" + configFilePath + "'"
       print "Using default config:\n" + config
-    else:
-      config = open(filePath,"rb").read()
 
     actionRe = self.getActionRegex()
     integerRe = re.compile(
@@ -309,7 +314,7 @@ torch = Torch()
 actions = getActions()
 conds = getConds()
 config = Config()
-config.parse(configFilePath)
+config.parse()
 
 class ClickTimer(QWidget):
   def __init__(self, key):
