@@ -4,6 +4,7 @@ if [ "$USER" != "root" ]; then
   exit 1
 fi
 
+sh /opt/n9-button-monitor/stop.sh
 /bin/develsh -c "
   source /etc/profile
   PATH=$PATH:/usr/local/bin
