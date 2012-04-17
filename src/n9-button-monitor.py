@@ -7,10 +7,6 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #####
-#dependencies:
-# python-qtmobility.systeminfo
-# python-qtmobility.multimediakit
-#####
 #based on:
 # Ye Olde Camerra Hack - Another fine Harmattan Hack Powered by Python(tm)!
 # 2012-01-12; Thomas Perl <thp.io/about>
