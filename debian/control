@@ -1,0 +1,11 @@
+Source: n9-button-monitor
+Section: user/Other
+Priority: extra
+Maintainer: teleshoes <elliot.wolk@gmail.com>
+Standards-Version: 3.8.4
+
+Package: n9-button-monitor
+Architecture: any
+Depends: xresponse, x11-utils, python-qmsystem, python-qtmobility.multimediakit, python-qtmobility.systeminfo, python-pyside.qtgui, python-pyside.qtcore
+Description: Nokia N9 Volume Button Actions
+ Runs actions at different times when user (single/double/treble/long) clicks a hardware volume key.

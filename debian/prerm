@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/sbin/stop apps/n9-button-monitor
+

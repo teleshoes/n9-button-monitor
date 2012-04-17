@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/sbin/start apps/n9-button-monitor
+
