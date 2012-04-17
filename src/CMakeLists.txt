@@ -1,5 +1,5 @@
 install(
-  TARGETS
+  PROGRAMS
     n9-button-monitor.py
     start.sh
     stop.sh
