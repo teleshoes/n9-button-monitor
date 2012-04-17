@@ -1,0 +1,10 @@
+<aegis>
+        <request>
+                <credential name="UID::user" />
+                <credential name="GID::users" />
+                <credential name="GRP::users" />
+                <for path="/opt/n9-button-monitor/start.sh" />
+                <for path="/opt/n9-button-monitor/stop.sh" />
+                <for path="/opt/n9-button-monitor/n9-button-monitor.py" />
+        </request>
+</aegis>
