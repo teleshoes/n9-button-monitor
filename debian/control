@@ -2,6 +2,7 @@ Source: n9-button-monitor
 Section: user/Other
 Priority: extra
 Maintainer: teleshoes <elliot.wolk@gmail.com>
+Build-Depends: aegis-builder (>= 1.4)
 Standards-Version: 3.8.4
 
 Package: n9-button-monitor
