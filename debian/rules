@@ -38,7 +38,8 @@ clean:
 	dh_testroot
 	rm -f build-stamp configure-stamp
 	# Add here commands to clean up after the build process.
-	cd build && $(MAKE) clean
+	#cd build && $(MAKE) clean
+	cd build
 	dh_clean 
 
 install: build
