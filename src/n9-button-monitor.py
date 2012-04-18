@@ -1,16 +1,10 @@
 #!/usr/bin/python
-#n9-button-monitor v0.4
+#N9 Button Monitor
 #Copyright 2012 Elliot Wolk
-#####
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-#####
-#based on:
-# Ye Olde Camerra Hack - Another fine Harmattan Hack Powered by Python(tm)!
-# 2012-01-12; Thomas Perl <thp.io/about>
-#
 
 from QmSystem import QmKeys
 from PySide.QtGui import QApplication, QWidget
