@@ -3,3 +3,11 @@ install(
     n9-button-monitor.py
   DESTINATION
     /opt/n9-button-monitor)
+install(
+  FILES
+    actions.py
+    clicktimer.py
+    config.py
+    torch.py
+  DESTINATION
+    /opt/n9-button-monitor)
