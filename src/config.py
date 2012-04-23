@@ -14,7 +14,6 @@ import os
 import re
 
 configFilePath = "/home/user/.config/n9-button-monitor.ini"
-deprecatedConfigFilePath = "/home/user/.config/n9-button-monitor.conf"
 
 class Config():
   def __init__(self,
@@ -67,10 +66,6 @@ class Config():
   def parse(self):
     if os.path.isfile(configFilePath):
       config = open(configFilePath,"rb").read()
-    elif os.path.isfile(deprecatedConfigFilePath):
-      config = open(deprecatedConfigFilePath,"rb").read()
-      print ("WARNING: config file should be '" + configFilePath + "'\n" +
-             "{not '" + deprecatedConfigFilePath + "'}")
     else:
       config = self.getDefaultConfig()
       print "WARNING: no config file at '" + configFilePath + "'"
