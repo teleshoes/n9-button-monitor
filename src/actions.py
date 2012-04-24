@@ -15,80 +15,37 @@ MUSIC_SUITE_STATE_PLAYING = 1
 MUSIC_SUITE_STATE_PAUSED = 2
 MUSIC_SUITE_STATE_OFF = 0
 
-class ActionSet():
-  def getActionLambdaDict(self, torch):
-    return getActionLambdaDict(torch)
-  def getActionNames(self):
-    return self.getActionLambdaDict(None).keys()
-  def getCondLambdaDict(self):
-    return getCondLambdaDict()
-  def getCondNames(self):
-    return self.getCondLambdaDict().keys()
+class ActionDict():
+  def __init__(self, torch):
+    self.actionLambdaDict = (
+      { "cameraSnap": lambda: drag("820x240,820x240")
+      , "cameraFocus": lambda: drag("820x240-820x100*200+5")
+      , "torchOn": lambda: torch.on()
+      , "torchOff": lambda: torch.off()
+      , "torchToggle": lambda: torch.toggle()
+      , "cmd": lambda x: lambda: shellCmd(x)
+      , "musicPlayPause": lambda: musicPlayPause()
+      , "musicNext": lambda: musicSuiteDbus("next")
+      , "musicPrev": lambda: musicSuiteDbus("previous")
+      })
 
-class ActionMap():
-  def __init__(self, actionName, actionParam,
-               condName, condParam, key, clickType):
-    self.actionName = actionName
-    self.actionParam = actionParam
-    self.condName = condName
-    self.condParam = condParam
-    self.key = key
-    self.clickType = clickType
-  def initLambdas(self, actionLambdaDict, condLambdaDict):
-    self.actionLambda = self.getLambda(
-      actionLambdaDict, self.actionName, self.actionParam)
-    self.condLambda = self.getLambda(
-      condLambdaDict, self.condName, self.condParam)
-  def __str__(self):
-    if self.actionParam == None:
-      param = ""
-    else:
-      param = "(" + self.actionParam + ")"
-    action = self.actionName + param
-    return (str(self.key) + "[" + self.clickType + "]: " + action)
-  def getLambda(self, lambdaDict, lambdaName, lambdaParam):
-    lam = lambdaDict[lambdaName]
-    assert self.isLambda(lam), "'" + lambdaName + "' not defined"
-    if lambdaParam != None:
-      try:
-        lam = lam(lambdaParam)
-        assert self.isLambda(lam)
-      except:
-        print >> sys.stderr, (
-          "'" + lambdaName + "' does not accept an argument\n" +
-          "{given: '" + lambdaParam + "'}")
-        sys.exit(1)
-    return lam
-  def isLambda(self, v):
-    return isinstance(v, type(lambda: None)) and v.__name__ == '<lambda>'
+    self.conditionLambdaDict = (
+      { "screenLocked": lambda: QSystemDeviceInfo().isDeviceLocked()
+      , "cameraAppFocused": lambda: isAppOnTop("camera-ui")
+      , "appFocused": lambda x: lambda: isAppOnTop(x)
+      })
+
+  def getActionLambdaDict(self):
+    return self.actionLambdaDict
+  def getConditionLambdaDict(self):
+    return self.conditionLambdaDict
 
 ###############
-
-def getCondLambdaDict():
-  return { "screenLocked": lambda: QSystemDeviceInfo().isDeviceLocked()
-         , "cameraAppFocused": lambda: isAppOnTop("camera-ui")
-         , "appFocused": lambda x: lambda: isAppOnTop(x)
-         }
 
 def isAppOnTop(app):
   winId = readProc(["xprop", "-root", "_NET_ACTIVE_WINDOW"]) [40:]
   winCmd = readProc(["xprop", "-id", winId, "WM_COMMAND"]) [24:-4]
   return app in winCmd
-
-###############
-
-def getActionLambdaDict(torch):
-  return { "cameraSnap": lambda: drag("820x240,820x240")
-         , "cameraFocus": lambda: drag("820x240-820x100*200+5")
-         , "torchOn": lambda: torch.on()
-         , "torchOff": lambda: torch.off()
-         , "torchToggle": lambda: torch.toggle()
-         , "cmd": lambda x: lambda: shellCmd(x)
-         , "drag": lambda x: lambda: drag
-         , "musicPlayPause": lambda: musicPlayPause()
-         , "musicNext": lambda: musicSuiteDbus("next")
-         , "musicPrev": lambda: musicSuiteDbus("previous")
-         }
 
 def musicPlayPause():
   state = musicSuiteDbus("playbackState")
@@ -111,8 +68,6 @@ def musicSuiteDbus(methodShortName):
 def drag(arg):
   runcmd(["xresponse", "-w", "1", "-d", arg])
 
-###############
-
 def shellCmd(cmd):
   runcmd(['sh', '-c', cmd])
 
@@ -125,4 +80,3 @@ def readProc(cmdArr):
   out, err = subprocess.Popen(cmdArr, stdout=subprocess.PIPE).communicate()
   return out
 
-###############

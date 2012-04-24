@@ -6,7 +6,6 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
-from actions import ActionMap
 from clicktimer import getButtons
 
 import sys
@@ -14,60 +13,60 @@ import os
 import re
 
 configFilePath = "/home/user/.config/n9-button-monitor.ini"
+defaultConfig = (
+"""#DEFAULT CONFIG
+torchAutoShutOffTimeMs=30000
+longClickDelayMs=400
+doubleClickDelayMs=400
+trebleClickDelayMs=600
+action=torchOn,volumeUp,longClickStart,screenLocked
+action=torchOff,volumeUp,longClickStop,screenLocked
+action=cameraFocus,volumeUp,longClickStart,cameraAppFocused
+action=cameraSnap,volumeUp,longClickStop,cameraAppFocused
+action=cameraSnap,volumeUp,singleClick,cameraAppFocused
+""")
 
 class Config():
-  def __init__(self,
-               validActionNames, validConditionNames,
-               validButtonNames, validClickTypeNames):
-    self.validActionNames = validActionNames
-    self.validConditionNames = validConditionNames
+  def __init__(self, actionDict, validButtonNames, validClickTypeNames):
+    self.actionDict = actionDict
+    self.validActionNames = actionDict.getActionLambdaDict().keys()
+    self.validConditionNames = actionDict.getConditionLambdaDict().keys()
     self.validButtonNames = validButtonNames
     self.validClickTypeNames = validClickTypeNames
+    self.resetConfig()
+
+  def resetConfig(self):
     self.torchAutoShutOffTimeMs=300000
     self.longClickDelayMs=400
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
     self.actionMaps = []
-  def initLambdas(self, actionLambdaDict, condLambdaDict):
-    for actionMap in self.actionMaps:
-      actionMap.initLambdas(actionLambdaDict, condLambdaDict)
-  def getDefaultConfig(self):
-    return (""
-      + "#DEFAULT CONFIG\n"
-      + "torchAutoShutOffTimeMs=30000\n"
-      + "longClickDelayMs=400\n"
-      + "doubleClickDelayMs=400\n"
-      + "trebleClickDelayMs=600\n"
-      + "action=torchOn,volumeUp,longClickStart,screenLocked\n"
-      + "action=torchOff,volumeUp,longClickStop,screenLocked\n"
-      + "action=cameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
-      + "action=cameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
-      + "action=cameraSnap,volumeUp,singleClick,cameraAppFocused\n"
-      )
+    self.actionMapSet = ActionMapSet()
+
   def getIntFieldRegex(self, fieldName):
     return re.compile("^" + fieldName + "=" + "(\d+)" + "$")
   def getActionMapRegex(self):
-    ptrn = (""
-           + "^"
-           + "\\s*action\\s*=\\s*"
-           + "(?P<actionName>" + "|".join(self.validActionNames) + ")"
-           + "(?:" + "\(" + "(?P<actionParam>[^)]*)" + "\)" + ")?"
-           + "\\s*,\\s*"
-           + "(?P<button>" + "|".join(self.validButtonNames) + ")"
-           + "\\s*,\\s*"
-           + "(?P<clickType>" + "|".join(self.validClickTypeNames) + ")"
-           + "\\s*,\\s*"
-           + "(?P<condName>" + "|".join(self.validConditionNames) + ")"
-           + "(?:" + "\(" + "(?P<condParam>[^)]*)" + "\)" + ")?"
-           + "\\s*(#.*)?"
-           + "$"
-           )
-    return re.compile(ptrn)
+    return re.compile(""
+      + "^"
+      + "\\s*action\\s*=\\s*"
+      + "(?P<actionName>" + "|".join(self.validActionNames) + ")"
+      + "(?:" + "\(" + "(?P<actionParam>[^)]*)" + "\)" + ")?"
+      + "\\s*,\\s*"
+      + "(?P<button>" + "|".join(self.validButtonNames) + ")"
+      + "\\s*,\\s*"
+      + "(?P<clickType>" + "|".join(self.validClickTypeNames) + ")"
+      + "\\s*,\\s*"
+      + "(?P<condName>" + "|".join(self.validConditionNames) + ")"
+      + "(?:" + "\(" + "(?P<condParam>[^)]*)" + "\)" + ")?"
+      + "\\s*(#.*)?"
+      + "$"
+      )
   def parse(self):
+    self.resetConfig()
     if os.path.isfile(configFilePath):
       config = open(configFilePath,"rb").read()
     else:
-      config = self.getDefaultConfig()
+      config = defaultConfig
       print "WARNING: no config file at '" + configFilePath + "'"
       print "Using default config:\n" + config
 
@@ -86,10 +85,9 @@ class Config():
         key = integerMatch.group("key")
         val = int(integerMatch.group("value"))
 
-      if commentMatch != None or emptyMatch != None:
-        pass
-      elif actionMapMatch != None:
+      if actionMapMatch != None:
         self.actionMaps.append(ActionMap(
+          self.actionDict,
           actionName = actionMapMatch.group("actionName"),
           actionParam = actionMapMatch.group("actionParam"),
           condName = actionMapMatch.group("condName"),
@@ -105,7 +103,68 @@ class Config():
         self.doubleClickDelayMs = val
       elif key == "trebleClickDelayMs":
         self.trebleClickDelayMs = val
-      else:
+      elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
         sys.exit(1)
+    self.actionMapSet.setActionMaps(self.actionMaps)
+  def getActionMapSet(self):
+    return self.actionMapSet
+
+class ActionMapSet():
+  def setActionMaps(self, actionMaps):
+    self.actionMapsByKeyByClickType = dict()
+    for a in actionMaps:
+      if not a.clickType in self.actionMapsByKeyByClickType:
+        self.actionMapsByKeyByClickType[a.clickType] = dict()
+      actionMapsByKey = self.actionMapsByKeyByClickType[a.clickType]
+      if not a.key in actionMapsByKey:
+        actionMapsByKey[a.key] = []
+      actionMapsByKey[a.key].append(a)
+  def getActionMaps(self, key, clickType):
+    if not clickType in self.actionMapsByKeyByClickType:
+      return []
+    elif not key in self.actionMapsByKeyByClickType[clickType]:
+      return []
+    else:
+      return self.actionMapsByKeyByClickType[clickType][key]
+    
+class ActionMap():
+  def __init__(self, actionDict,
+               actionName, actionParam,
+               condName, condParam,
+               key, clickType):
+    self.actionName = actionName
+    self.actionParam = actionParam
+    self.condName = condName
+    self.condParam = condParam
+    self.key = key
+    self.clickType = clickType
+    
+    self.actionLambda = self.getLambda(actionDict.getActionLambdaDict(),
+      self.actionName, self.actionParam)
+    self.condLambda = self.getLambda(actionDict.getConditionLambdaDict(),
+      self.condName, self.condParam)
+  def __str__(self):
+    if self.actionParam == None:
+      param = ""
+    else:
+      param = "(" + self.actionParam + ")"
+    action = self.actionName + param
+    return (str(self.key) + "[" + self.clickType + "]: " + action)
+  def getLambda(self, lambdaDict, lambdaName, lambdaParam):
+    lam = lambdaDict[lambdaName]
+    assert self.isLambda(lam), "'" + lambdaName + "' not defined"
+    if lambdaParam != None:
+      try:
+        lam = lam(lambdaParam)
+        assert self.isLambda(lam)
+      except:
+        print >> sys.stderr, (
+          "'" + lambdaName + "' does not accept an argument\n" +
+          "{given: '" + lambdaParam + "'}")
+        sys.exit(1)
+    return lam
+  def isLambda(self, v):
+    return isinstance(v, type(lambda: None)) and v.__name__ == '<lambda>'
+
 

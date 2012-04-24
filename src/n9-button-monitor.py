@@ -7,7 +7,7 @@
 # (at your option) any later version.
 
 from config import Config
-from actions import ActionSet
+from actions import ActionDict
 from clicktimer import ClickTimer, getButtons, getClickTypes
 from torch import Torch
 
@@ -21,20 +21,18 @@ import time
 import subprocess
 
 def main():
-  actionSet = ActionSet()
+  torch = Torch()
+  
+  actionDict = ActionDict(torch)
 
   config = Config(
-    actionSet.getActionNames(), actionSet.getCondNames(),
-    getButtons().keys(), getClickTypes())
+    actionDict,
+    getButtons().keys(),
+    getClickTypes())
   
+  torch.setConfig(config)
+
   config.parse()
-
-  torch = Torch(config.torchAutoShutOffTimeMs)
-
-  config.initLambdas(
-    actionSet.getActionLambdaDict(torch),
-    actionSet.getCondLambdaDict()
-  )
 
   app = QApplication(sys.argv)
   torch.initCamera()

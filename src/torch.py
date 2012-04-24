@@ -26,10 +26,12 @@ class TorchAutoShutOff(QWidget):
       self.torch.off()
 
 class Torch():
-  def __init__(self, autoShutOffTimeMs):
+  def __init__(self):
     self.state = "off"
-    self.autoShutOffTimeMs = autoShutOffTimeMs
- 
+
+  def setConfig(self, config):
+    self.config = config
+
   def initCamera(self):
     self.camera = QCamera()
     self.autoShutOff = TorchAutoShutOff(self)
@@ -48,8 +50,8 @@ class Torch():
     self.camera.exposure().setFlashMode(QCameraExposure.FlashTorch)
     self.camera.start()
     self.state = "on"
-    if self.autoShutOffTimeMs != None:
-      self.autoShutOff.schedule(self.autoShutOffTimeMs)
+    if self.config != None and self.config.torchAutoShutOffTimeMs != None:
+      self.autoShutOff.schedule(self.config.torchAutoShutOffTimeMs)
 
   def off(self):
     self.autoShutOff.cancel()
