@@ -1,1 +1,2 @@
 install(FILES n9-button-monitor.conf DESTINATION /etc/init/apps)
+install(FILES n9-button-monitor.desktop DESTINATION /usr/share/applications)
