@@ -7,6 +7,7 @@
 # (at your option) any later version.
 
 from config import Config
+from guiconfig import GuiConfig
 from actions import ActionDict
 from clicktimer import ClickTimer, getButtons, getClickTypes
 from torch import Torch
@@ -23,11 +24,15 @@ import subprocess
 name = sys.argv[0]
 usage = ("Usage:\n"
   + "  " + name + "     start monitoring buttons\n"
+  + "  " + name + " -g  launch gui for configuring\n"
   + "  " + name + " -h  show this message\n"
 )
 
 def main():
-  if len(sys.argv) == 2 and sys.argv[1] == '-h':
+  if len(sys.argv) == 2 and sys.argv[1] == '-g':
+    GuiConfig().showGui()
+    return 0
+  elif len(sys.argv) == 2 and sys.argv[1] == '-h':
     print usage
     return 0
   elif len(sys.argv) > 1:
