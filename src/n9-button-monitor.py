@@ -20,21 +20,35 @@ import re
 import time
 import subprocess
 
-def main():
-  torch = Torch()
-  
-  actionDict = ActionDict(torch)
+name = sys.argv[0]
+usage = ("Usage:\n"
+  + "  " + name + "     start monitoring buttons\n"
+  + "  " + name + " -h  show this message\n"
+)
 
+def main():
+  if len(sys.argv) == 2 and sys.argv[1] == '-h':
+    print usage
+    return 0
+  elif len(sys.argv) > 1:
+    print >> sys.stderr, usage
+    return 1
+  else:
+    startMonitor()
+    return 0
+
+def startMonitor():
+  torch = Torch()
+  actionDict = ActionDict(torch)
   config = Config(
     actionDict,
     getButtons().keys(),
     getClickTypes())
-  
   torch.setConfig(config)
 
   config.parse()
 
-  app = QApplication(sys.argv)
+  app = QApplication([])
   torch.initCamera()
   keys = QmKeys()
   buttonTimers = dict()
