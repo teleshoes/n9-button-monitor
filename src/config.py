@@ -105,7 +105,7 @@ class Config():
         self.trebleClickDelayMs = val
       elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
-        sys.exit(1)
+        raise Exception("Unparseable config entry: " + line)
     self.actionMapSet.setActionMaps(self.actionMaps)
   def getActionMapSet(self):
     return self.actionMapSet
@@ -161,10 +161,10 @@ class ActionMap():
         lam = lam(lambdaParam)
         assert self.isLambda(lam)
       except:
-        print >> sys.stderr, (
-          "'" + lambdaName + "' does not accept an argument\n" +
+        msg = ("'" + lambdaName + "' does not accept an argument\n" +
           "{given: '" + lambdaParam + "'}")
-        sys.exit(1)
+        print >> sys.stderr, msg
+        raise Exception(msg)
     return lam
   def isLambda(self, v):
     return isinstance(v, type(lambda: None)) and v.__name__ == '<lambda>'
