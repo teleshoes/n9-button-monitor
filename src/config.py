@@ -64,18 +64,19 @@ class Config():
   def parse(self):
     self.resetConfig()
     if os.path.isfile(configFilePath):
-      config = open(configFilePath,"rb").read()
+      confText = open(configFilePath,"rb").read()
     else:
-      config = defaultConfig
+      confText = defaultConfig
       print "WARNING: no config file at '" + configFilePath + "'"
-      print "Using default config:\n" + config
-
+      print "Using default config:\n" + confText
+    self.parse(confText)
+  def parse(self, confText):
     actionMapRe = self.getActionMapRegex()
     integerRe = re.compile(
       "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>\d+)\\s*(#.*)?$")
     commentRe = re.compile("^\\s*#.*$")
     emptyRe = re.compile("^\\s*$")
-    for line in config.splitlines():
+    for line in confText.splitlines():
       actionMapMatch = actionMapRe.match(line)
       integerMatch = integerRe.match(line)
       commentMatch = commentRe.match(line)
