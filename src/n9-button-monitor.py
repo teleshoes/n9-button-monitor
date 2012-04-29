@@ -51,7 +51,7 @@ def startMonitor():
     getClickTypes())
   torch.setConfig(config)
 
-  config.parse()
+  config.parseConfigFile()
 
   app = QApplication([])
   torch.initCamera()

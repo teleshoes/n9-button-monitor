@@ -70,11 +70,11 @@ class Config():
       return open(getConfigFilePath(),"rb").read()
     else:
       return None
-  def parse(self):
-    confText = getConfigFileContent()
+  def parseConfigFile(self):
+    confText = self.getConfigFileContent()
     if confText == None:
-      confText = getDefaultConfig()
-      print "WARNING: no config file at '" + configFilePath + "'"
+      confText = self.getDefaultConfig()
+      print "WARNING: no config file at '" + getConfigFilePath() + "'"
       print "Using default config:\n" + confText
     self.parse(confText)
   def parse(self, confText):
