@@ -27,12 +27,15 @@ class GuiConfig():
     panel.addWidget(self.makeButton("Load Default Config",
       self.loadConfigDefault))
     panel.addWidget(self.makeButton("Save Config File", self.saveConfig))
+    panel.addWidget(self.makeButton("Add action row", self.addActionRow))
     return panel
   def makeButton(self, label, clickFunc):
     btn = QPushButton(label)
     btn.clicked.connect(clickFunc)
     return btn
     
+  def addActionRow(self):
+    self.configPanel.actionTable.addRow(None)
   def showGui(self):
     app = QApplication([])
 
@@ -137,11 +140,12 @@ class ActionTable():
     self.actionDict = actionDict
     self.actionRows = []
   def initUI(self):
-    self.table = QTableWidget(0, 6)
+    self.table = QTableWidget(0, 7)
     self.table.setHorizontalHeaderLabels([
       "Button", "Click Type",
       "Action Name", "Action Param",
-      "Condition Name", "Condition Param"])
+      "Condition Name", "Condition Param",
+      "Delete"])
   def getWidget(self):
     return self.table
   def clear(self):
@@ -151,15 +155,27 @@ class ActionTable():
     r = self.table.rowCount()
     self.table.setRowCount(r+1)
     row = ActionRow(self.actionDict)
+
+    deleteBtn = QPushButton("Delete")
+    deleteBtn.clicked.connect(lambda: self.deleteRow(row))
+
     self.table.setCellWidget(r, 0, row.buttonBox)
     self.table.setCellWidget(r, 1, row.clickTypeBox)
     self.table.setCellWidget(r, 2, row.actionNameBox)
     self.table.setCellWidget(r, 3, row.actionParamBox)
     self.table.setCellWidget(r, 4, row.conditionNameBox)
     self.table.setCellWidget(r, 5, row.conditionParamBox)
+    self.table.setCellWidget(r, 6, deleteBtn)
+
     self.actionRows.append(row)
     if actionMap != None:
       row.setActionMap(actionMap)
+  def deleteRow(self, actionRow):
+    for i in range(len(self.actionRows)):
+      if actionRow == self.actionRows[i]:
+        self.actionRows.remove(actionRow)
+        self.table.removeRow(i)
+        return
   def formatActionRows(self):
     str = ''
     for actionRow in self.actionRows:
