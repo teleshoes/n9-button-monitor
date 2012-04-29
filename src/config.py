@@ -12,19 +12,8 @@ import sys
 import os
 import re
 
-configFilePath = "/home/user/.config/n9-button-monitor.ini"
-defaultConfig = (
-"""#DEFAULT CONFIG
-torchAutoShutOffTimeMs=30000
-longClickDelayMs=400
-doubleClickDelayMs=400
-trebleClickDelayMs=600
-action=torchOn,volumeUp,longClickStart,screenLocked
-action=torchOff,volumeUp,longClickStop,screenLocked
-action=cameraFocus,volumeUp,longClickStart,cameraAppFocused
-action=cameraSnap,volumeUp,longClickStop,cameraAppFocused
-action=cameraSnap,volumeUp,singleClick,cameraAppFocused
-""")
+def getConfigFilePath():
+  return "/home/user/.config/n9-button-monitor.ini"
 
 class Config():
   def __init__(self, actionDict, validButtonNames, validClickTypeNames):
@@ -34,6 +23,21 @@ class Config():
     self.validButtonNames = validButtonNames
     self.validClickTypeNames = validClickTypeNames
     self.resetConfig()
+  def getDefaultConfig(self):
+    return ("#DEFAULT CONFIG\n"
+      + "torchAutoShutOffTimeMs=30000\n"
+      + "longClickDelayMs=400\n"
+      + "doubleClickDelayMs=400\n"
+      + "trebleClickDelayMs=600\n"
+      + "action=torchOn,volumeUp,longClickStart,screenLocked\n"
+      + "action=torchOff,volumeUp,longClickStop,screenLocked\n"
+      + "action=musicPlayPause,volumeUp,singleClick,screenLocked\n"
+      + "action=musicNext,volumeDown,singleClick,screenLocked\n"
+      + "action=musicPrev,volumeDown,doubleClick,screenLocked\n"
+      + "action=cameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
+      + "action=cameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
+      + "action=cameraSnap,volumeUp,singleClick,cameraAppFocused\n"
+      )
 
   def resetConfig(self):
     self.torchAutoShutOffTimeMs=300000
@@ -62,14 +66,14 @@ class Config():
       + "$"
       )
   def getConfigFileContent(self):
-    if os.path.isfile(configFilePath):
+    if os.path.isfile(getConfigFilePath()):
       return open(configFilePath,"rb").read()
     else:
       return None
   def parse(self):
     confText = getConfigFileContent()
     if confText == None:
-      confText = defaultConfig
+      confText = getDefaultConfig()
       print "WARNING: no config file at '" + configFilePath + "'"
       print "Using default config:\n" + confText
     self.parse(confText)
