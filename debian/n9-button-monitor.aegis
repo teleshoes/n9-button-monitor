@@ -3,8 +3,6 @@
     <credential name="UID::user" />
     <credential name="GRP::users" />
     <credential name="GID::users" />
-    <credential name="GRP::metadata-users" />
-    <credential name="GID::metadata-users" />
     <credential name="GRP::video" />
     <credential name="GRP::pulse-access" />
     <for path="/opt/n9-button-monitor/n9-button-monitor.py" />
