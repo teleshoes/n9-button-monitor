@@ -67,7 +67,7 @@ class Config():
       )
   def getConfigFileContent(self):
     if os.path.isfile(getConfigFilePath()):
-      return open(configFilePath,"rb").read()
+      return open(getConfigFilePath(),"rb").read()
     else:
       return None
   def parse(self):
