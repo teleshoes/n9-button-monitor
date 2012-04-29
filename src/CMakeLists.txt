@@ -8,6 +8,7 @@ install(
     actions.py
     clicktimer.py
     config.py
+    guiconfig.py
     torch.py
   DESTINATION
     /opt/n9-button-monitor)
