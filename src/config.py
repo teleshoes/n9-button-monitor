@@ -61,16 +61,20 @@ class Config():
       + "\\s*(#.*)?"
       + "$"
       )
-  def parse(self):
-    self.resetConfig()
+  def getConfigFileContent(self):
     if os.path.isfile(configFilePath):
-      confText = open(configFilePath,"rb").read()
+      return open(configFilePath,"rb").read()
     else:
+      return None
+  def parse(self):
+    confText = getConfigFileContent()
+    if confText == None:
       confText = defaultConfig
       print "WARNING: no config file at '" + configFilePath + "'"
       print "Using default config:\n" + confText
     self.parse(confText)
   def parse(self, confText):
+    self.resetConfig()
     actionMapRe = self.getActionMapRegex()
     integerRe = re.compile(
       "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>\d+)\\s*(#.*)?$")
