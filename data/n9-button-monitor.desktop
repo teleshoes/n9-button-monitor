@@ -2,5 +2,5 @@
 Type=Application
 Name=Btn Monitor
 Icon=icon-m-service-dopplr
-Exec=/usr/bin/invoker --type=m 'python /opt/n9-button-monitor.py -g'
+Exec=python /opt/n9-button-monitor/n9-button-monitor.py -g
 OnlyShowIn=X-MeeGo;
