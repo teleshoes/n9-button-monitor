@@ -92,7 +92,7 @@ class Config():
           actionParam = actionMapMatch.group("actionParam"),
           condName = actionMapMatch.group("condName"),
           condParam = actionMapMatch.group("condParam"),
-          key = getButtons()[actionMapMatch.group("button")],
+          button = actionMapMatch.group("button"),
           clickType = actionMapMatch.group("clickType"),
         ))
       elif key == "torchAutoShutOffTimeMs":
@@ -112,6 +112,7 @@ class Config():
 
 class ActionMapSet():
   def setActionMaps(self, actionMaps):
+    self.actionMaps = actionMaps
     self.actionMapsByKeyByClickType = dict()
     for a in actionMaps:
       if not a.clickType in self.actionMapsByKeyByClickType:
@@ -132,12 +133,13 @@ class ActionMap():
   def __init__(self, actionDict,
                actionName, actionParam,
                condName, condParam,
-               key, clickType):
+               button, clickType):
     self.actionName = actionName
     self.actionParam = actionParam
     self.condName = condName
     self.condParam = condParam
-    self.key = key
+    self.button = button
+    self.key = getButtons()[button]
     self.clickType = clickType
     
     self.actionLambda = self.getLambda(actionDict.getActionLambdaDict(),
@@ -166,5 +168,4 @@ class ActionMap():
     return lam
   def isLambda(self, v):
     return isinstance(v, type(lambda: None)) and v.__name__ == '<lambda>'
-
 
