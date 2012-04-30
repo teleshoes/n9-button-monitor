@@ -99,6 +99,7 @@ class ClickTimer(QWidget):
     self.timer.start(time, self)
   def click(self, clickType):
     self.reset()
+    self.config.checkConfigFile()
     print str(self.key) + ": " + clickType
     
     for a in self.config.getActionMapSet().getActionMaps(self.key, clickType):
