@@ -35,7 +35,7 @@ class Config():
         self.parseConfigFile()
       except:
         print >> sys.stderr, "INVALID CONFIG, USING DEFAULT"
-        self.parse(getDefaultConfig())
+        self.parse(self.getDefaultConfig())
     self.lastTimeStamp = timestamp 
   def getTimeStamp(self):
     if os.path.isfile(getConfigFilePath()):
