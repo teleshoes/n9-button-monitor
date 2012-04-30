@@ -11,6 +11,7 @@ from clicktimer import getButtons
 import sys
 import os
 import re
+import subprocess
 
 def getConfigFilePath():
   return "/home/user/.config/n9-button-monitor.ini"
@@ -23,6 +24,29 @@ class Config():
     self.validButtonNames = validButtonNames
     self.validClickTypeNames = validClickTypeNames
     self.resetConfig()
+    self.lastTimeStamp = None
+
+  def checkConfigFile(self):
+    timestamp = self.getTimeStamp()
+    print >> sys.stderr, timestamp
+    if self.lastTimeStamp == None or self.lastTimeStamp != timestamp:
+      try:
+        print >> sys.stderr, "refreshing config"
+        self.parseConfigFile()
+      except:
+        print >> sys.stderr, "INVALID CONFIG, USING DEFAULT"
+        self.parse(getDefaultConfig())
+    self.lastTimeStamp = timestamp 
+  def getTimeStamp(self):
+    if os.path.isfile(getConfigFilePath()):
+      cmdArr = ["stat", "-t", getConfigFilePath()]
+      out, err = subprocess.Popen(cmdArr, stdout=subprocess.PIPE).communicate()
+      if err == None or len(err) == 0:
+        return out
+      else:
+        return "error"
+    else:
+      return "missing"
   def getDefaultConfig(self):
     return ("#DEFAULT CONFIG\n"
       + "torchAutoShutOffTimeMs=30000\n"
