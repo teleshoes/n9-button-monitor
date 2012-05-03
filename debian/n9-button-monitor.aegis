@@ -1,7 +1,6 @@
 <aegis>
   <request>
     <credential name="UID::user" />
-    <credential name="GRP::users" />
     <credential name="GID::users" />
     <credential name="GRP::video" />
     <credential name="GRP::pulse-access" />
