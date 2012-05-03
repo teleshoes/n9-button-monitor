@@ -1,5 +1,5 @@
 Source: n9-button-monitor
-Section: user/Other
+Section: user/utilities
 Priority: extra
 Maintainer: teleshoes <elliot.wolk@gmail.com>
 Build-Depends: aegis-builder (>= 1.4)
