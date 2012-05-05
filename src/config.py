@@ -28,7 +28,6 @@ class Config():
 
   def checkConfigFile(self):
     timestamp = self.getTimeStamp()
-    print >> sys.stderr, timestamp
     if self.lastTimeStamp == None or self.lastTimeStamp != timestamp:
       try:
         print >> sys.stderr, "refreshing config"
