@@ -11,6 +11,7 @@ from PySide.QtCore import QBasicTimer
 
 import os
 import ctypes
+import sys
 
 STATE_ON = 2
 STATE_OFF = 0
@@ -100,7 +101,7 @@ class ClickTimer(QWidget):
   def click(self, clickType):
     self.reset()
     self.config.checkConfigFile()
-    print str(self.key) + ": " + clickType
+    print >> sys.stderr, str(self.key) + ": " + clickType
     
     for a in self.config.getActionMapSet().getActionMaps(self.key, clickType):
       if a.condLambda == None or a.condLambda():
