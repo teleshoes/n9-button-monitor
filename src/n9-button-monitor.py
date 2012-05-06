@@ -10,7 +10,7 @@ from config import Config
 from guiconfig import GuiConfig
 from actions import ActionDict
 from clicktimer import ClickTimer, getButtons, getClickTypes
-from torch import Torch
+from camera import Camera
 
 from QmSystem import QmKeys
 from PySide.QtGui import QApplication
@@ -43,18 +43,18 @@ def main():
     return 0
 
 def startMonitor():
-  torch = Torch()
-  actionDict = ActionDict(torch)
+  camera = Camera()
+  actionDict = ActionDict(camera)
   config = Config(
     actionDict,
     getButtons().keys(),
     getClickTypes())
-  torch.setConfig(config)
+  camera.setConfig(config)
 
   config.checkConfigFile()
 
   app = QApplication([])
-  torch.initCamera()
+  camera.initCamera()
   keys = QmKeys()
   buttonTimers = dict()
   for b in getButtons().values():

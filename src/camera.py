@@ -8,12 +8,16 @@
 
 from PySide.QtGui import QWidget
 from PySide.QtCore import QBasicTimer
-from QtMobility.MultimediaKit import QCamera, QCameraExposure
+from QtMobility.MultimediaKit import (QCamera, QCameraExposure)
+
+import time
+import sys
+import subprocess
 
 class TorchAutoShutOff(QWidget):
-  def __init__(self, torch):
+  def __init__(self, camera):
     super(TorchAutoShutOff, self).__init__()
-    self.torch = torch
+    self.camera = camera
     self.timer = QBasicTimer()
   def schedule(self, time):
     self.timer.start(time, self)
@@ -21,43 +25,43 @@ class TorchAutoShutOff(QWidget):
     self.timer.stop()
   def timerEvent(self, e):
     self.timer.stop()
-    if self.torch.state == "on":
+    if self.camera.torchState == "on":
       print "auto shut-off"
-      self.torch.off()
+      self.camera.torchOff()
 
-class Torch():
+class Camera():
   def __init__(self):
-    self.state = "off"
+    self.torchState = "off"
 
   def setConfig(self, config):
     self.config = config
 
   def initCamera(self):
-    self.camera = QCamera()
+    self.qcam = QCamera()
     self.autoShutOff = TorchAutoShutOff(self)
     self.on()
     self.autoShutOff.schedule(500)
 
-  def toggle(self):
-    if self.state == "on":
-      self.off()
+  def torchToggle(self):
+    if self.torchState == "on":
+      self.torchOff()
     else:
-      self.on()
+      self.torchOn()
 
-  def on(self):
+  def torchOn(self):
     print "torch on"
-    self.camera.setCaptureMode(QCamera.CaptureVideo)
-    self.camera.exposure().setFlashMode(QCameraExposure.FlashTorch)
-    self.camera.start()
-    self.state = "on"
+    self.qcam.setCaptureMode(QCamera.CaptureVideo)
+    self.qcam.exposure().setFlashMode(QCameraExposure.FlashTorch)
+    self.qcam.start()
+    self.torchState = "on"
     if self.config != None and self.config.torchAutoShutOffTimeMs != None:
       self.autoShutOff.schedule(self.config.torchAutoShutOffTimeMs)
 
-  def off(self):
+  def torchOff(self):
     self.autoShutOff.cancel()
     print "torch off"
-    self.camera.setCaptureMode(QCamera.CaptureStillImage)
-    self.camera.exposure().setFlashMode(QCameraExposure.FlashManual)
-    self.camera.unlock()
-    self.camera.unload()
-    self.state = "off"
+    self.qcam.setCaptureMode(QCamera.CaptureStillImage)
+    self.qcam.exposure().setFlashMode(QCameraExposure.FlashManual)
+    self.qcam.unlock()
+    self.qcam.unload()
+    self.torchState = "off"
