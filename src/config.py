@@ -48,7 +48,7 @@ class Config():
       return "missing"
   def getDefaultConfig(self):
     return ("#DEFAULT CONFIG\n"
-      + "torchAutoShutOffTimeMs=30000\n"
+      + "torchAutoShutOffTimeMs=300000\n"
       + "longClickDelayMs=400\n"
       + "doubleClickDelayMs=400\n"
       + "trebleClickDelayMs=600\n"
