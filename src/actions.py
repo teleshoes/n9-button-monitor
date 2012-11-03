@@ -33,6 +33,7 @@ class ActionDict():
       { "screenLocked": lambda: QSystemDeviceInfo().isDeviceLocked()
       , "cameraAppFocused": lambda: isAppOnTop("camera-ui")
       , "appFocused": lambda x: lambda: isAppOnTop(x)
+      , "always": lambda: True
       })
 
   def getActionLambdaDict(self):
