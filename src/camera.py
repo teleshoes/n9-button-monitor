@@ -39,7 +39,6 @@ class Camera():
   def initCamera(self):
     self.qcam = QCamera()
     self.autoShutOff = TorchAutoShutOff(self)
-    self.on()
     self.autoShutOff.schedule(500)
 
   def torchToggle(self):
