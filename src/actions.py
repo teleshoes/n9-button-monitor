@@ -7,9 +7,13 @@
 # (at your option) any later version.
 
 from QtMobility.SystemInfo import QSystemDeviceInfo
+from PySide import QtGui
 
 import sys
 import subprocess
+import time
+
+SCREENSHOT_DIR = '/home/user/MyDocs'
 
 MUSIC_SUITE_STATE_PLAYING = 1
 MUSIC_SUITE_STATE_PAUSED = 2
@@ -27,6 +31,7 @@ class ActionDict():
       , "musicPlayPause": lambda: musicPlayPause()
       , "musicNext": lambda: musicSuiteDbus("next")
       , "musicPrev": lambda: musicSuiteDbus("previous")
+      , "screenShot": lambda: screenShot()
       })
 
     self.conditionLambdaDict = (
@@ -68,6 +73,12 @@ def musicSuiteDbus(methodShortName):
 
 def drag(arg):
   runcmd(["xresponse", "-w", "1", "-d", arg])
+
+def screenShot():
+  millis = int(round(time.time() * 1000))
+  fileName = SCREENSHOT_DIR + "/screenshot_" + str(millis) + ".png"
+  ss = QtGui.QPixmap.grabWindow(QtGui.QApplication.desktop().winId())
+  ss.save(fileName, "png")
 
 def shellCmd(cmd):
   runcmd(['sh', '-c', cmd])
