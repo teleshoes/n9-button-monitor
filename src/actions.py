@@ -77,7 +77,10 @@ def drag(arg):
 def screenShot():
   millis = int(round(time.time() * 1000))
   fileName = SCREENSHOT_DIR + "/screenshot_" + str(millis) + ".png"
+
   ss = QtGui.QPixmap.grabWindow(QtGui.QApplication.desktop().winId())
+  rot90 = QtGui.QTransform().rotate(90)
+  ss = ss.toImage().transformed(rot90)
   ss.save(fileName, "png")
 
 def shellCmd(cmd):
