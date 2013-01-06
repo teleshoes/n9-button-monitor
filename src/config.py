@@ -24,10 +24,9 @@ class Config():
     self.validConditionNames = actionDict.getConditionLambdaDict().keys()
     self.validButtonNames = validButtonNames
     self.validClickTypeNames = validClickTypeNames
-    self.resetConfig()
-    self.lastTimeStamp = None
     self.dbusButton = DbusButton()
-
+    self.lastTimeStamp = None
+    self.resetConfig()
   def checkConfigFile(self):
     timestamp = self.getTimeStamp()
     if self.lastTimeStamp == None or self.lastTimeStamp != timestamp:
