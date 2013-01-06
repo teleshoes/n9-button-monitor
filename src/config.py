@@ -147,14 +147,25 @@ class Config():
 class ActionMapSet():
   def setActionMaps(self, actionMaps):
     self.actionMaps = actionMaps
+    self.actionMapsByDbusButton = dict()
     self.actionMapsByKeyByClickType = dict()
     for a in actionMaps:
-      if not a.clickType in self.actionMapsByKeyByClickType:
-        self.actionMapsByKeyByClickType[a.clickType] = dict()
-      actionMapsByKey = self.actionMapsByKeyByClickType[a.clickType]
-      if not a.key in actionMapsByKey:
-        actionMapsByKey[a.key] = []
-      actionMapsByKey[a.key].append(a)
+      if a.button == "dbus":
+        if not a.buttonParam in self.actionMapsByDbusButton:
+          self.actionMapsByDbusButton[a.buttonParam] = []
+        self.actionMapsByDbusButton[a.buttonParam].append(a)
+      else:
+        if not a.clickType in self.actionMapsByKeyByClickType:
+          self.actionMapsByKeyByClickType[a.clickType] = dict()
+        actionMapsByKey = self.actionMapsByKeyByClickType[a.clickType]
+        if not a.key in actionMapsByKey:
+          actionMapsByKey[a.key] = []
+        actionMapsByKey[a.key].append(a)
+  def getActionMapsForDbus(self, button):
+    if not button in self.actionMapsByDbusButton:
+      return []
+    else:
+      return self.actionMapsByDbusButton[button]
   def getActionMapsForKey(self, key, clickType):
     if not clickType in self.actionMapsByKeyByClickType:
       return []

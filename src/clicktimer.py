@@ -26,7 +26,8 @@ def getClickTypes():
 
 def getButtons():
   return { "volumeUp": BUTTON_VOLUME_UP
-         , "volumeDown": BUTTON_VOLUME_DOWN}
+         , "volumeDown": BUTTON_VOLUME_DOWN
+         , "dbus": "dbus"}
 
 ###############
 
