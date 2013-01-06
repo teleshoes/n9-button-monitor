@@ -53,6 +53,7 @@ class Config():
       + "longClickDelayMs=400\n"
       + "doubleClickDelayMs=400\n"
       + "trebleClickDelayMs=600\n"
+      + "dbusBufferMs=800\n"
       + "action=torchOn,volumeUp,longClickStart,screenLocked\n"
       + "action=torchOff,volumeUp,longClickStop,screenLocked\n"
       + "action=musicPlayPause,volumeUp,singleClick,screenLocked\n"
@@ -68,6 +69,7 @@ class Config():
     self.longClickDelayMs=400
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
+    self.dbusButton.setRepeatBufferMs(800)
     self.actionMaps = []
     self.actionMapSet = ActionMapSet()
 
@@ -138,6 +140,8 @@ class Config():
         self.doubleClickDelayMs = val
       elif key == "trebleClickDelayMs":
         self.trebleClickDelayMs = val
+      elif key == "dbusBufferMs":
+        self.dbusButton.setRepeatBufferMs(val)
       elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
         raise Exception("Unparseable config entry: " + line)

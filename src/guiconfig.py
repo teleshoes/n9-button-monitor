@@ -89,10 +89,12 @@ class ConfigPanel(QVBoxLayout):
     self.longClickDelayMsNumBox = NumBox("Long-click Delay (ms): ")
     self.doubleClickDelayMsNumBox = NumBox("Double-click Delay (ms): ")
     self.trebleClickDelayMsNumBox = NumBox("Treble-click Delay (ms): ")
+    self.dbusBufferMsNumBox = NumBox("D-Bus Buffer (ms): ")
     self.addLayout(self.torchAutoShutOffTimeMsNumBox)
     self.addLayout(self.longClickDelayMsNumBox)
     self.addLayout(self.doubleClickDelayMsNumBox)
     self.addLayout(self.trebleClickDelayMsNumBox)
+    self.addLayout(self.dbusBufferMsNumBox)
 
     self.addWidget(self.actionTable.getWidget())
   def applyConfig(self, config):
@@ -100,6 +102,7 @@ class ConfigPanel(QVBoxLayout):
     self.longClickDelayMsNumBox.setVal(config.longClickDelayMs)
     self.doubleClickDelayMsNumBox.setVal(config.doubleClickDelayMs)
     self.trebleClickDelayMsNumBox.setVal(config.trebleClickDelayMs)
+    self.dbusBufferMsNumBox.setVal(config.dbusButton.repeatBufferMs)
     self.actionTable.clear()
     for actionMap in config.getActionMapSet().actionMaps:
       self.actionTable.addRow(actionMap)
@@ -114,6 +117,8 @@ class ConfigPanel(QVBoxLayout):
         + str(self.doubleClickDelayMsNumBox.getVal()) + "\n"
       + "trebleClickDelayMs="
         + str(self.trebleClickDelayMsNumBox.getVal()) + "\n"
+      + "dbusBufferMs="
+        + str(self.dbusBufferMsNumBox.getVal()) + "\n"
       + self.actionTable.formatActionRows()
       )
   def clear(self):
