@@ -1,3 +1,7 @@
+n9-button-monitor (0.5.0) UNRELEASED; urgency=low
+  * add dbus buttons for bluetooth speakers
+ -- teleshoes <elliot.wolk@gmail.com>  Sun, 06 Jan 2013 15:31:54 +0100
+
 n9-button-monitor (0.4.5) UNRELEASED; urgency=low
   * rotate screenShot 90 degrees, portrait is better default
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
