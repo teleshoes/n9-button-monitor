@@ -16,46 +16,46 @@ from dbus.mainloop.glib import DBusGMainLoop
 from PySide.QtCore import QCoreApplication
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-dbus_service="org.freedesktop.Hal"
-dbus_path="/org/freedesktop/Hal/devices/computer_logicaldev_input_0"
-dbus_interface="org.freedesktop.Hal.Device"
-dbus_member="Condition"
 
-## for some horrible reason, i get 8 clicks sometimes
-## this buffer ignores repeated clicks within a certain time
-## set it to -1 to never ignore
-repeat_buffer_millis=800
+class DbusButton():
+  def __init__(self):
+    self.service="org.freedesktop.Hal"
+    self.path="/org/freedesktop/Hal/devices/computer_logicaldev_input_0"
+    self.interface="org.freedesktop.Hal.Device"
+    self.member="Condition"
 
-last_button_click_millis = dict()
+    self.repeatBufferMs = 800
 
-def button_clicked(button, handler):
-  now_millis = int(round(time.time() * 1000))
-  if button in last_button_click_millis:
-    then_millis = last_button_click_millis[button]
-    if now_millis - then_millis < repeat_buffer_millis:
-      print >> sys.stderr, "  ignored: " + button
-      return
-
-  last_button_click_millis[button] = now_millis
-  handler(button)
-
-def defaultHandler(button):
-  print >> sys.stderr, "button: " + button
-
-def connectButtonDbus(handler=defaultHandler):
-  dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-  bus = dbus.SystemBus()
-  try:
-    obj = bus.get_object(dbus_service, dbus_path)
-    iface = dbus.Interface(obj, dbus_interface)
-  except dbus.DBusException:
-    print_exc()
-    sys.exit(1)
+    self.lastClickMs = dict()
+    self.handler = self.defaultHandler
+  def defaultHandler(self, button):
+    print >> sys.stderr, "button: " + button
+  def setHandler(self, handler):
+    self.handler = handler
+  def setRepeatBufferMs(self, repeatBufferMs):
+    self.repeatBufferMs = repeatBufferMs
+  def buttonClicked(self, btn):
+    nowMs = int(round(time.time() * 1000))
+    if btn in self.lastClickMs:
+      if nowMs - self.lastClickMs[btn] < self.repeatBufferMs:
+        print >> sys.stderr, "  ignored: " + btn
+        return
+    self.lastClickMs[btn] = nowMs
+    self.handler(btn)
+  def connectButtonDbus(self):
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    bus = dbus.SystemBus()
+    try:
+      obj = bus.get_object(self.service, self.path)
+      iface = dbus.Interface(obj, self.interface)
+    except dbus.DBusException:
+      print_exc()
+      sys.exit(1)
  
-  iface.connect_to_signal(dbus_member,
-    lambda cond, arg: button_clicked(arg, handler))
+    iface.connect_to_signal(self.member,
+      lambda cond, arg: self.buttonClicked(arg))
 
 if __name__ == '__main__':
   app = QCoreApplication([])
-  connectButtonDbus()
+  DbusButton().connectButtonDbus()
   app.exec_()
