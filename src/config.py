@@ -7,6 +7,7 @@
 # (at your option) any later version.
 
 from clicktimer import getButtons
+from dbusbtn import DbusButton
 
 import sys
 import os
@@ -25,6 +26,7 @@ class Config():
     self.validClickTypeNames = validClickTypeNames
     self.resetConfig()
     self.lastTimeStamp = None
+    self.dbusButton = DbusButton()
 
   def checkConfigFile(self):
     timestamp = self.getTimeStamp()
