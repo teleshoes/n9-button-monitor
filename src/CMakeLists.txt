@@ -9,6 +9,7 @@ install(
     camera.py
     clicktimer.py
     config.py
+    dbusbtn.py
     guiconfig.py
   DESTINATION
     /opt/n9-button-monitor)
