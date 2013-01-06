@@ -153,7 +153,7 @@ class ActionMapSet():
       if not a.key in actionMapsByKey:
         actionMapsByKey[a.key] = []
       actionMapsByKey[a.key].append(a)
-  def getActionMaps(self, key, clickType):
+  def getActionMapsForKey(self, key, clickType):
     if not clickType in self.actionMapsByKeyByClickType:
       return []
     elif not key in self.actionMapsByKeyByClickType[clickType]:
