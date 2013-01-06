@@ -10,6 +10,7 @@ from config import Config
 from guiconfig import GuiConfig
 from actions import ActionDict
 from clicktimer import ClickTimer, getButtons, getClickTypes
+from dbusbtn import connectButtonDbus
 from camera import Camera
 
 from QmSystem import QmKeys
@@ -42,6 +43,12 @@ def main():
     startMonitor()
     return 0
 
+def dbusBtn(config, button):
+  actionMaps = config.getActionMapSet()
+  for a in actionMaps.getActionMapsForDbus(button):
+    if a.condLambda == None or a.condLambda():
+      a.actionLambda()
+
 def startMonitor():
   camera = Camera()
   actionDict = ActionDict(camera)
@@ -61,6 +68,7 @@ def startMonitor():
     buttonTimers[b] = ClickTimer(b, config)
   keys.keyEvent.connect(lambda k, s:
     (k in buttonTimers and buttonTimers[k].keyEvent(s)))
+  connectButtonDbus(lambda button: dbusBtn(config, button))
   app.exec_()
 
 if __name__ == "__main__":
