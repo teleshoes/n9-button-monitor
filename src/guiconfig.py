@@ -142,7 +142,7 @@ class ActionTable():
   def initUI(self):
     self.table = QTableWidget(0, 7)
     self.table.setHorizontalHeaderLabels([
-      "Button", "Click Type",
+      "Button", "Button Param", "Click Type",
       "Action Name", "Action Param",
       "Condition Name", "Condition Param",
       "Delete"])
@@ -160,12 +160,13 @@ class ActionTable():
     deleteBtn.clicked.connect(lambda: self.deleteRow(row))
 
     self.table.setCellWidget(r, 0, row.buttonBox)
-    self.table.setCellWidget(r, 1, row.clickTypeBox)
-    self.table.setCellWidget(r, 2, row.actionNameBox)
-    self.table.setCellWidget(r, 3, row.actionParamBox)
-    self.table.setCellWidget(r, 4, row.conditionNameBox)
-    self.table.setCellWidget(r, 5, row.conditionParamBox)
-    self.table.setCellWidget(r, 6, deleteBtn)
+    self.table.setCellWidget(r, 1, row.buttonParamBox)
+    self.table.setCellWidget(r, 2, row.clickTypeBox)
+    self.table.setCellWidget(r, 3, row.actionNameBox)
+    self.table.setCellWidget(r, 4, row.actionParamBox)
+    self.table.setCellWidget(r, 5, row.conditionNameBox)
+    self.table.setCellWidget(r, 6, row.conditionParamBox)
+    self.table.setCellWidget(r, 7, deleteBtn)
 
     self.actionRows.append(row)
     if actionMap != None:
@@ -188,6 +189,7 @@ class ActionRow():
     self.actionDict = actionDict
 
     self.buttonBox = self.makeComboBox(getButtons().keys())
+    self.buttonParamBox = QLineEdit()
     self.clickTypeBox = self.makeComboBox(getClickTypes())
     self.actionNameBox = self.makeComboBox(
       self.actionDict.getActionLambdaDict().keys())
@@ -211,6 +213,7 @@ class ActionRow():
 
   def setActionMap(self, actionMap):
     self.setComboBoxByText(self.buttonBox, actionMap.button)
+    self.buttonParamBox.setText(actionMap.buttonParam)
     self.setComboBoxByText(self.clickTypeBox, actionMap.clickType)
     self.setComboBoxByText(self.actionNameBox, actionMap.actionName)
     self.actionParamBox.setText(actionMap.actionParam)
@@ -233,6 +236,12 @@ class ActionRow():
     self.conditionName = self.conditionNameBox.itemText(index)
   
   def format(self):
+    buttonParam = self.buttonParamBox.text()
+    if buttonParam != None and len(buttonParam) > 0:
+      buttonParam = "(" + buttonParam + ")"
+    else:
+      buttonParam = ""
+
     actionParam = self.actionParamBox.text()
     if actionParam != None and len(actionParam) > 0:
       actionParam = "(" + actionParam + ")"
@@ -247,7 +256,7 @@ class ActionRow():
     
     return ("action="
       + self.actionName + actionParam + ","
-      + self.button + ","
+      + self.button + buttonParam + ","
       + self.clickType + ","
       + self.conditionName + conditionParam
       + "\n")

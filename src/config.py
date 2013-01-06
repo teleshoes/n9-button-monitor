@@ -80,6 +80,7 @@ class Config():
       + "(?:" + "\(" + "(?P<actionParam>[^)]*)" + "\)" + ")?"
       + "\\s*,\\s*"
       + "(?P<button>" + "|".join(self.validButtonNames) + ")"
+      + "(?:" + "\(" + "(?P<buttonParam>[^)]*)" + "\)" + ")?"
       + "\\s*,\\s*"
       + "(?P<clickType>" + "|".join(self.validClickTypeNames) + ")"
       + "\\s*,\\s*"
@@ -125,6 +126,7 @@ class Config():
           condName = actionMapMatch.group("condName"),
           condParam = actionMapMatch.group("condParam"),
           button = actionMapMatch.group("button"),
+          buttonParam = actionMapMatch.group("buttonParam"),
           clickType = actionMapMatch.group("clickType"),
         ))
       elif key == "torchAutoShutOffTimeMs":
@@ -165,12 +167,13 @@ class ActionMap():
   def __init__(self, actionDict,
                actionName, actionParam,
                condName, condParam,
-               button, clickType):
+               button, buttonParam, clickType):
     self.actionName = actionName
     self.actionParam = actionParam
     self.condName = condName
     self.condParam = condParam
     self.button = button
+    self.buttonParam = buttonParam
     self.key = getButtons()[button]
     self.clickType = clickType
     
