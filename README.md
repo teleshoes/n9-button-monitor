@@ -10,25 +10,24 @@ the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 #####
 
-Control volume up/down actions
+Add actions to volume keys from lockscreen, camera, and other apps.
 
-features:
--currently shines flashlight/torch from lockscreen
--focuses/snaps pix in camera, using VOL+
--playpause/prev/next from lockscreen for harmattan music suite
+Features:
+1) toggle flashlight/torch from lockscreen
+2) focuses/snaps pix in camera, using VOL+
+3) playpause/prev/next from lockscreen for harmattan music suite
+4) take a screenshot {portrait mode, goes into MyDocs}
+5) extensible; can run arbitrary commands, in any app you specify, for single-click, double-click, treble-click, or long-clicks.
+6) ugly gui for configuring it {changes automatically picked up without restart}
+7) bluetooth speaker media buttons through hal dbus
 
-installation:
-1) install deps {apt-get install}
-xresponse
-x11-utils
-python-qmsystem
-python-qtmobility.multimediakit
-python-qtmobility.systeminfo
-python-pyside.qtgui
-python-pyside.qtcore
-
-2) copy n9-button-monitor.py to phone, e.g. to MyDocs with Sync&Connect
-
-3) open a terminal, and execute it as root like this:
-devel-su -c "develsh -c 'python /home/user/MyDocs/n9-button-monitor.py'"
+Dependencies: {apt-get install}
+    xresponse
+    x11-utils
+    python-dbus
+    python-qmsystem
+    python-qtmobility.multimediakit
+    python-qtmobility.systeminfo
+    python-pyside.qtgui
+    python-pyside.qtcore
 ```
