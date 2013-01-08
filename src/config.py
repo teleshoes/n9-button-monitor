@@ -27,6 +27,7 @@ class Config():
     self.dbusButton = DbusButton()
     self.lastTimeStamp = None
     self.resetConfig()
+    self.initRegex()
   def checkConfigFile(self):
     timestamp = self.getTimeStamp()
     if self.lastTimeStamp == None or self.lastTimeStamp != timestamp:
@@ -73,10 +74,15 @@ class Config():
     self.actionMaps = []
     self.actionMapSet = ActionMapSet([])
 
-  def getIntFieldRegex(self, fieldName):
-    return re.compile("^" + fieldName + "=" + "(\d+)" + "$")
-  def getActionMapRegex(self):
-    return re.compile(""
+
+  def initRegex(self):
+    self.integerRe = re.compile(
+      "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>\d+)\\s*(#.*)?$")
+    self.strRe = re.compile(
+      "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>.*?)\\s*(#.*)?$")
+    self.commentRe = re.compile("^\\s*#")
+    self.emptyRe = re.compile("^\\s*$")
+    self.actionMapRe = re.compile(""
       + "^"
       + "\\s*action\\s*=\\s*"
       + "(?P<actionName>" + "|".join(self.validActionNames) + ")"
@@ -106,16 +112,11 @@ class Config():
     self.parse(confText)
   def parse(self, confText):
     self.resetConfig()
-    actionMapRe = self.getActionMapRegex()
-    integerRe = re.compile(
-      "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>\d+)\\s*(#.*)?$")
-    commentRe = re.compile("^\\s*#.*$")
-    emptyRe = re.compile("^\\s*$")
     for line in confText.splitlines():
-      actionMapMatch = actionMapRe.match(line)
-      integerMatch = integerRe.match(line)
-      commentMatch = commentRe.match(line)
-      emptyMatch = emptyRe.match(line)
+      actionMapMatch = self.actionMapRe.match(line)
+      integerMatch = self.integerRe.match(line)
+      commentMatch = self.commentRe.match(line)
+      emptyMatch = self.emptyRe.match(line)
       key = None
       if integerMatch != None:
         key = integerMatch.group("key")
