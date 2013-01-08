@@ -71,7 +71,6 @@ class Config():
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
     self.dbusButton.setRepeatBufferMs(800)
-    self.actionMaps = []
     self.actionMapSet = ActionMapSet([])
 
 
@@ -112,6 +111,7 @@ class Config():
     self.parse(confText)
   def parse(self, confText):
     self.resetConfig()
+    actionMaps = []
     for line in confText.splitlines():
       actionMapMatch = self.actionMapRe.match(line)
       integerMatch = self.integerRe.match(line)
@@ -123,7 +123,7 @@ class Config():
         val = int(integerMatch.group("value"))
 
       if actionMapMatch != None:
-        self.actionMaps.append(ActionMap(
+        actionMaps.append(ActionMap(
           self.actionDict,
           actionName = actionMapMatch.group("actionName"),
           actionParam = actionMapMatch.group("actionParam"),
