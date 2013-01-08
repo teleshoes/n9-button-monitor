@@ -45,8 +45,7 @@ def main():
 def dbusBtnClicked(config, button):
   actionMaps = config.getActionMapSet()
   for a in actionMaps.getActionMapsForDbus(button):
-    if a.condLambda == None or a.condLambda():
-      a.actionLambda()
+    a.maybeRun()
 
 def startMonitor():
   camera = Camera()

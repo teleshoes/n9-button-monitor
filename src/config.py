@@ -197,6 +197,9 @@ class ActionMap():
       self.actionName, self.actionParam)
     self.condLambda = self.getLambda(actionDict.getConditionLambdaDict(),
       self.condName, self.condParam)
+  def maybeRun(self):
+    if self.condLambda == None or self.condLambda():
+      self.actionLambda()
   def __str__(self):
     if self.actionParam == None:
       param = ""

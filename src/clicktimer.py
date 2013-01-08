@@ -106,8 +106,7 @@ class ClickTimer(QWidget):
 
     actionMaps = self.config.getActionMapSet()
     for a in actionMaps.getActionMapsForKey(self.key, clickType):
-      if a.condLambda == None or a.condLambda():
-        a.actionLambda()
+      a.maybeRun()
   def timerEvent(self, e):
     self.timer.stop()
     self.checkEvent()
