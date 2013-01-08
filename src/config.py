@@ -71,7 +71,7 @@ class Config():
     self.trebleClickDelayMs=600
     self.dbusButton.setRepeatBufferMs(800)
     self.actionMaps = []
-    self.actionMapSet = ActionMapSet()
+    self.actionMapSet = ActionMapSet([])
 
   def getIntFieldRegex(self, fieldName):
     return re.compile("^" + fieldName + "=" + "(\d+)" + "$")
@@ -145,12 +145,12 @@ class Config():
       elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
         raise Exception("Unparseable config entry: " + line)
-    self.actionMapSet.setActionMaps(self.actionMaps)
+    self.actionMapSet = ActionMapSet(actionMaps)
   def getActionMapSet(self):
     return self.actionMapSet
 
 class ActionMapSet():
-  def setActionMaps(self, actionMaps):
+  def __init__(self, actionMaps):
     self.actionMaps = actionMaps
     self.actionMapsByDbusButton = dict()
     self.actionMapsByKeyByClickType = dict()
