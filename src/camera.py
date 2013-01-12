@@ -68,6 +68,7 @@ class Camera():
 
   def pictureSaved(self, picId, picFilename):
     print >>sys.stderr, 'saved picture: ' + picFilename
+    self.playSound()
     self.unloadCamera()
 
   def error(self, errId, err, errStr):
@@ -81,6 +82,12 @@ class Camera():
   def getPictureFile(self):
     millis = int(round(time.time() * 1000))
     return "/home/user/MyDocs/DCIM/" + str(millis) + ".jpg"
+
+  def getSoundFile(self):
+    return "/usr/share/sounds/ui-tones/snd_camera_shutter.wav"
+
+  def playSound(self):
+    subprocess.Popen(["aplay", self.getSoundFile()])
 
   def torchToggle(self):
     if self.torchState == "on":
