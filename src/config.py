@@ -60,9 +60,9 @@ class Config():
       + "action=musicPlayPause,volumeUp,singleClick,screenLocked\n"
       + "action=musicNext,volumeDown,singleClick,screenLocked\n"
       + "action=musicPrev,volumeDown,doubleClick,screenLocked\n"
-      + "action=cameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
-      + "action=cameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
-      + "action=cameraSnap,volumeUp,singleClick,cameraAppFocused\n"
+      + "action=clickCameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
+      + "action=clickCameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
+      + "action=clickCameraSnap,volumeUp,singleClick,cameraAppFocused\n"
       )
 
   def resetConfig(self):

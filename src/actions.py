@@ -22,8 +22,8 @@ MUSIC_SUITE_STATE_OFF = 0
 class ActionDict():
   def __init__(self, camera):
     self.actionLambdaDict = (
-      { "cameraSnap":       lambda: drag("820x240,820x240")
-      , "cameraFocus":      lambda: drag("820x240-820x100*200+5")
+      { "clickCameraSnap":  lambda: drag("820x240,820x240")
+      , "clickCameraFocus": lambda: drag("820x240-820x100*200+5")
       , "torchOn":          lambda: camera.torchOn()
       , "torchOff":         lambda: camera.torchOff()
       , "torchToggle":      lambda: camera.torchToggle()
