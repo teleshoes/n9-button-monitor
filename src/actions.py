@@ -24,6 +24,7 @@ class ActionDict():
     self.actionLambdaDict = (
       { "clickCameraSnap":  lambda: drag("820x240,820x240")
       , "clickCameraFocus": lambda: drag("820x240-820x100*200+5")
+      , "quickSnap":        lambda flash: lambda: camera.focusAndSnap(flash)
       , "torchOn":          lambda: camera.torchOn()
       , "torchOff":         lambda: camera.torchOff()
       , "torchToggle":      lambda: camera.torchToggle()

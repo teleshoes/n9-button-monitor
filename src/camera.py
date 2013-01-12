@@ -8,7 +8,8 @@
 
 from PySide.QtGui import QWidget
 from PySide.QtCore import QBasicTimer
-from QtMobility.MultimediaKit import (QCamera, QCameraExposure)
+from QtMobility.MultimediaKit import (
+  QCamera, QCameraExposure, QCameraImageCapture)
 
 import time
 import sys
@@ -38,6 +39,12 @@ class Camera():
 
   def initCamera(self):
     self.qcam = QCamera()
+    self.qcam.locked.connect(self.snap)
+
+    self.imgCapture = QCameraImageCapture(self.qcam)
+    self.imgCapture.imageSaved.connect(self.pictureSaved)
+    self.imgCapture.error.connect(self.error)
+
     self.autoShutOff = TorchAutoShutOff(self)
     self.autoShutOff.schedule(500)
 
@@ -50,9 +57,30 @@ class Camera():
       , "torch":  QCameraExposure.FlashTorch
       }[mode])
 
+  def focusAndSnap(self, flashMode):
+    self.qcam.setCaptureMode(QCamera.CaptureStillImage)
+    self.qcam.start()
+    self.setFlashMode(flashMode)
+    self.qcam.searchAndLock()
+
+  def snap(self):
+    self.imgCapture.capture(self.getFile())
+
+  def pictureSaved(self, picId, picFilename):
+    print >>sys.stderr, 'saved picture: ' + picFilename
+    self.unloadCamera()
+
+  def error(self, errId, err, errStr):
+    print >>sys.stderr, "error: " + errStr
+    self.unloadCamera()
+
   def unloadCamera(self):
     self.qcam.unlock()
     self.qcam.unload()
+
+  def getFile(self):
+    millis = int(round(time.time() * 1000))
+    return "/home/user/MyDocs/DCIM/" + str(millis) + ".jpg"
 
   def torchToggle(self):
     if self.torchState == "on":
