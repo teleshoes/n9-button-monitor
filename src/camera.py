@@ -64,7 +64,7 @@ class Camera():
     self.qcam.searchAndLock()
 
   def snap(self):
-    self.imgCapture.capture(self.getFile())
+    self.imgCapture.capture(self.getPictureFile())
 
   def pictureSaved(self, picId, picFilename):
     print >>sys.stderr, 'saved picture: ' + picFilename
@@ -78,7 +78,7 @@ class Camera():
     self.qcam.unlock()
     self.qcam.unload()
 
-  def getFile(self):
+  def getPictureFile(self):
     millis = int(round(time.time() * 1000))
     return "/home/user/MyDocs/DCIM/" + str(millis) + ".jpg"
 
