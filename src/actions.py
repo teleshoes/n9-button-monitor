@@ -27,7 +27,7 @@ class ActionDict():
       , "torchOn":          lambda: camera.torchOn()
       , "torchOff":         lambda: camera.torchOff()
       , "torchToggle":      lambda: camera.torchToggle()
-      , "cmd":              lambda x: lambda: shellCmd(x)
+      , "cmd":              lambda cmd: lambda: shellCmd(cmd)
       , "musicPlayPause":   lambda: musicPlayPause()
       , "musicNext":        lambda: musicSuiteDbus("next")
       , "musicPrev":        lambda: musicSuiteDbus("previous")
