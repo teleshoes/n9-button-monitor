@@ -22,16 +22,16 @@ MUSIC_SUITE_STATE_OFF = 0
 class ActionDict():
   def __init__(self, camera):
     self.actionLambdaDict = (
-      { "cameraSnap": lambda: drag("820x240,820x240")
-      , "cameraFocus": lambda: drag("820x240-820x100*200+5")
-      , "torchOn": lambda: camera.torchOn()
-      , "torchOff": lambda: camera.torchOff()
-      , "torchToggle": lambda: camera.torchToggle()
-      , "cmd": lambda x: lambda: shellCmd(x)
-      , "musicPlayPause": lambda: musicPlayPause()
-      , "musicNext": lambda: musicSuiteDbus("next")
-      , "musicPrev": lambda: musicSuiteDbus("previous")
-      , "screenShot": lambda: screenShot()
+      { "cameraSnap":       lambda: drag("820x240,820x240")
+      , "cameraFocus":      lambda: drag("820x240-820x100*200+5")
+      , "torchOn":          lambda: camera.torchOn()
+      , "torchOff":         lambda: camera.torchOff()
+      , "torchToggle":      lambda: camera.torchToggle()
+      , "cmd":              lambda x: lambda: shellCmd(x)
+      , "musicPlayPause":   lambda: musicPlayPause()
+      , "musicNext":        lambda: musicSuiteDbus("next")
+      , "musicPrev":        lambda: musicSuiteDbus("previous")
+      , "screenShot":       lambda: screenShot()
       })
 
     self.conditionLambdaDict = (
