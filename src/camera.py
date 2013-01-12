@@ -41,6 +41,10 @@ class Camera():
     self.autoShutOff = TorchAutoShutOff(self)
     self.autoShutOff.schedule(500)
 
+  def unloadCamera(self):
+    self.qcam.unlock()
+    self.qcam.unload()
+
   def torchToggle(self):
     if self.torchState == "on":
       self.torchOff()
@@ -61,6 +65,5 @@ class Camera():
     print "torch off"
     self.qcam.setCaptureMode(QCamera.CaptureStillImage)
     self.qcam.exposure().setFlashMode(QCameraExposure.FlashManual)
-    self.qcam.unlock()
-    self.qcam.unload()
+    self.unloadCamera()
     self.torchState = "off"
