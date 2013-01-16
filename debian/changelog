@@ -1,3 +1,7 @@
+n9-button-monitor (0.5.1) UNRELEASED; urgency=low
+  * add quick snap
+ -- teleshoes <elliot.wolk@gmail.com>  Sat, 12 Jan 2013 16:43:58 +0100
+
 n9-button-monitor (0.5.0) UNRELEASED; urgency=low
   * add dbus buttons for bluetooth speakers
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 06 Jan 2013 15:31:54 +0100
