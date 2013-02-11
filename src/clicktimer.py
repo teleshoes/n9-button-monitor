@@ -16,6 +16,7 @@ import sys
 STATE_ON = 2
 STATE_OFF = 0
 
+BUTTON_N950CAMKEY = 1
 BUTTON_VOLUME_UP = 2
 BUTTON_VOLUME_DOWN = 3
 BUTTON_POWER = 20
@@ -27,6 +28,8 @@ def getClickTypes():
 def getButtons():
   return { "volumeUp": BUTTON_VOLUME_UP
          , "volumeDown": BUTTON_VOLUME_DOWN
+         , "cameraButton": BUTTON_N950CAMKEY
+         , "powerButton": BUTTON_POWER
          , "dbus": "dbus"}
 
 ###############

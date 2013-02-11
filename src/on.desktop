@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=ButtonMonitor
+Exec=/bin/sh /opt/adv-button-monitor/startstop.sh
+Icon=/usr/share/icons/hicolor/80x80/apps/adv-button-monitor-on.png

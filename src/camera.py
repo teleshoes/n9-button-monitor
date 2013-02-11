@@ -38,15 +38,16 @@ class Camera():
     self.config = config
 
   def initCamera(self):
-    self.qcam = QCamera()
-    self.qcam.locked.connect(self.snap)
+    if self.config != None and self.config.cameraDisabled != 1:
+      self.qcam = QCamera()
+      self.qcam.locked.connect(self.snap)
 
-    self.imgCapture = QCameraImageCapture(self.qcam)
-    self.imgCapture.imageSaved.connect(self.pictureSaved)
-    self.imgCapture.error.connect(self.error)
+      self.imgCapture = QCameraImageCapture(self.qcam)
+      self.imgCapture.imageSaved.connect(self.pictureSaved)
+      self.imgCapture.error.connect(self.error)
 
-    self.autoShutOff = TorchAutoShutOff(self)
-    self.autoShutOff.schedule(500)
+      self.autoShutOff = TorchAutoShutOff(self)
+      self.autoShutOff.schedule(500)
 
   def setFlashMode(self, mode):
     self.qcam.exposure().setFlashMode(
@@ -58,10 +59,11 @@ class Camera():
       }[mode])
 
   def focusAndSnap(self, flashMode):
-    self.qcam.setCaptureMode(QCamera.CaptureStillImage)
-    self.qcam.start()
-    self.setFlashMode(flashMode)
-    self.qcam.searchAndLock()
+    if self.config != None and self.config.cameraDisabled != 1:
+      self.qcam.setCaptureMode(QCamera.CaptureStillImage)
+      self.qcam.start()
+      self.setFlashMode(flashMode)
+      self.qcam.searchAndLock()
 
   def snap(self):
     self.imgCapture.capture(self.getPictureFile())
@@ -96,18 +98,20 @@ class Camera():
       self.torchOn()
 
   def torchOn(self):
-    print "torch on"
-    self.qcam.setCaptureMode(QCamera.CaptureVideo)
-    self.setFlashMode("torch")
-    self.qcam.start()
-    self.torchState = "on"
-    if self.config != None and self.config.torchAutoShutOffTimeMs != None:
-      self.autoShutOff.schedule(self.config.torchAutoShutOffTimeMs)
+    if self.config != None and self.config.cameraDisabled != 1:
+      print "torch on"
+      self.qcam.setCaptureMode(QCamera.CaptureVideo)
+      self.setFlashMode("torch")
+      self.qcam.start()
+      self.torchState = "on"
+      if self.config != None and self.config.torchAutoShutOffTimeMs != None:
+        self.autoShutOff.schedule(self.config.torchAutoShutOffTimeMs)
 
   def torchOff(self):
-    self.autoShutOff.cancel()
-    print "torch off"
-    self.qcam.setCaptureMode(QCamera.CaptureStillImage)
-    self.setFlashMode("manual")
-    self.unloadCamera()
-    self.torchState = "off"
+    if self.config != None and self.config.cameraDisabled != 1:
+      self.autoShutOff.cancel()
+      print "torch off"
+      self.qcam.setCaptureMode(QCamera.CaptureStillImage)
+      self.setFlashMode("manual")
+      self.unloadCamera()
+      self.torchState = "off"

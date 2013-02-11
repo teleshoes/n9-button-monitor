@@ -13,7 +13,7 @@ import sys
 import subprocess
 import time
 
-SCREENSHOT_DIR = '/home/user/MyDocs'
+SCREENSHOT_DIR = '/home/user/MyDocs/Pictures'
 
 MUSIC_SUITE_STATE_PLAYING = 1
 MUSIC_SUITE_STATE_PAUSED = 2
@@ -24,6 +24,7 @@ class ActionDict():
     self.actionLambdaDict = (
       { "clickCameraSnap":  lambda: drag("820x240,820x240")
       , "clickCameraFocus": lambda: drag("820x240-820x100*200+5")
+      , "tap":              lambda x: lambda: drag(x)
       , "quickSnap":        lambda flash: lambda: camera.focusAndSnap(flash)
       , "torchOn":          lambda: camera.torchOn()
       , "torchOff":         lambda: camera.torchOff()
