@@ -30,7 +30,6 @@ class Config():
     self.initRegex()
   def checkConfigFile(self):
     timestamp = self.getTimeStamp()
-    print >> sys.stderr, timestamp
     if self.lastTimeStamp == None or self.lastTimeStamp != timestamp:
       try:
         print >> sys.stderr, "refreshing config"
@@ -52,19 +51,18 @@ class Config():
   def getDefaultConfig(self):
     return ("#DEFAULT CONFIG\n"
       + "torchAutoShutOffTimeMs=300000\n"
-      + "cameraDisabled=1\n"
       + "longClickDelayMs=400\n"
       + "doubleClickDelayMs=400\n"
       + "trebleClickDelayMs=600\n"
       + "dbusBufferMs=800\n"
+      + "action=torchOn,volumeUp,longClickStart,screenLocked\n"
+      + "action=torchOff,volumeUp,longClickStop,screenLocked\n"
       + "action=musicPlayPause,volumeUp,singleClick,screenLocked\n"
       + "action=musicNext,volumeDown,singleClick,screenLocked\n"
       + "action=musicPrev,volumeDown,doubleClick,screenLocked\n"
       + "action=clickCameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
       + "action=clickCameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
       + "action=clickCameraSnap,volumeUp,singleClick,cameraAppFocused\n"
-      + "action=tap(69x67,69x67),volumeUp,singleClick,appFocused(frontcameravideo)\n"
-      + "action=tap(802x253,802x253),volumeUp,singleClick,appFocused(rawcam)\n"
       )
 
   def resetConfig(self):

@@ -13,7 +13,7 @@ import sys
 import subprocess
 import time
 
-SCREENSHOT_DIR = '/home/user/MyDocs/Pictures'
+SCREENSHOT_DIR = '/home/user/MyDocs'
 
 MUSIC_SUITE_STATE_PLAYING = 1
 MUSIC_SUITE_STATE_PAUSED = 2
