@@ -7,7 +7,6 @@ install(
 
 install(
   FILES
-    n9bm-toggle.desktop
     n9bm-gui.desktop
   DESTINATION
     /usr/share/applications
