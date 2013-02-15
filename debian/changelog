@@ -1,31 +1,5 @@
-n9-button-monitor (0.5.1) UNRELEASED; urgency=low
-  * add quick snap
- -- teleshoes <elliot.wolk@gmail.com>  Sat, 12 Jan 2013 16:43:58 +0100
+adv-button-monitor (1.0.7) unstable; urgency=low
 
-n9-button-monitor (0.5.0) UNRELEASED; urgency=low
-  * add dbus buttons for bluetooth speakers
- -- teleshoes <elliot.wolk@gmail.com>  Sun, 06 Jan 2013 15:31:54 +0100
+  * Initial release based on n9-button-monitor with few modifications.
 
-n9-button-monitor (0.4.5) UNRELEASED; urgency=low
-  * rotate screenShot 90 degrees, portrait is better default
- -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
-
-n9-button-monitor (0.4.4) UNRELEASED; urgency=low
-  * added condition=always and action=screenShot
- -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
-
-n9-button-monitor (0.4.3) UNRELEASED; urgency=low
-  * Configuration GUI
- -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
-
-n9-button-monitor (0.4.2) UNRELEASED; urgency=low
-  * Configuration GUI
- -- teleshoes <elliot.wolk@gmail.com>  Sat, 28 Apr 2012 18:17:22 +0100
-
-n9-button-monitor (0.4.1) UNRELEASED; urgency=low
-  * AEGIS-tastic
- -- teleshoes <elliot.wolk@gmail.com>  Tue, 16 Apr 2012 13:07:08 +0100
-
-n9-button-monitor (0.4.0) UNRELEASED; urgency=low
-  * Initial release.
- -- teleshoes <elliot.wolk@gmail.com>  Mon, 14 Apr 2012 16:15:48 +0100
+ -- Lcferrum <lcferrum@yandex.com>  Thu, 14 Feb 2013 23:22:50 +0400
