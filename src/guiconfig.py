@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #N9 Button Monitor
 #Copyright 2012 Elliot Wolk
+#Copyright 2013 Lcferrum
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
