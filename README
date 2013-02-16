@@ -1,0 +1,71 @@
+Advanced Button Monitor
+
+1. License
+----------
+Copyright (c) 2013 Lcferrum
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+2. About
+--------
+Advanced Button Monitor is toggleable daemon for Nokia N9/N950 that monitors
+hardware buttons and performs certain actions (defined in ini file) on clicks.
+
+Actions are performed conditionally based on type of click (single, double,
+etc.) and context (certain app is launched, screen is locked, etc.).
+
+It is written in python and based on n9-button-monitor daemon by Elliot Wolk.
+
+3. Where to get
+---------------
+You can build .deb package by yourself (refer to 'Building' section) or 
+download ready-made version from Sourceforge:
+
+	https://sourceforge.net/projects/adv-btn-mon/files/adv-button-monitor/
+	
+Main project homepage is at GitHub:
+
+	https://github.com/lcferrum/adv-button-monitor
+
+4. Usage
+--------
+Install the .deb on your device (don't forget to allow installation from
+non-Store sources in the Settings). As usual an icon will be placed on your
+homescreen. Click it and it will turn red - the daemon is now running and
+monitoring buttons. Click it once more and the icon will revert back to green,
+which means that daemon is now stopped.
+
+By default Advanced Button Monitor is using built-in config (you can find it in
+config.py file) that supports the following things:
+
+	- Controlling default music player from lockscreen using Volume Up/Down
+	- Taking pictures with default camera app using Volume Up
+	- Taking pictures with 'Front Camera N9 (video+)' using Volume Up
+	- Taking pictures with 'rawcam' using Volume Up
+
+You can create custom config file (where you can change button actions and some
+general settings) that application will use instead of built-in config. Place
+it here:
+
+	/home/user/.config/n9-button-monitor.ini
+	
+Example config (n9-button-monitor.ini), which also highlights other features
+and capabilities of Advanced Button Monitor, is included with the sources. 
+
+5. Building
+-----------
+The easiest way to build Advanced Button Monitor is by using MeeGo 1.2
+Harmattan Platform SDK provided by Nokia. Just make sure that you have
+installed Platform SDK correctly, start scratchbox, select HARMATTAN_ARMEL
+target, switch to sources directory and type:
+
+	dpkg-buildpackage -rfakeroot
+
+You can also use other means of building .deb packages (e.g. PySide Assistant
+or PyPackager) but they are not supported by the current distribution.

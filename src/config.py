@@ -1,11 +1,15 @@
 #!/usr/bin/python
 #N9 Button Monitor
-#Copyright 2012 Elliot Wolk
-#Copyright 2013 Lcferrum
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#Copyright (C) 2012 Elliot Wolk
+#Copyright (C) 2013 Lcferrum
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from clicktimer import getButtons
 from dbusbtn import DbusButton
@@ -70,7 +74,7 @@ class Config():
 
   def resetConfig(self):
     self.torchAutoShutOffTimeMs=300000
-    self.cameraDisabled=0
+    self.cameraDisabled=1
     self.longClickDelayMs=400
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
