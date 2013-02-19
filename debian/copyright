@@ -7,9 +7,13 @@ Files: *
 Copyright: 2013, Lcferrum
 License: GPL-3
 
-Files: /opt/adv-button-monitor/*.py
+Files: src/*.py
 Copyright: 2012, Elliot Wolk
            2013, Lcferrum
+License: GPL-3
+
+Files: src/dbusbtn.py src/n9-button-monitor.py
+Copyright: 2012, Elliot Wolk
 License: GPL-3
 
 License: GPL-3
