@@ -45,9 +45,10 @@ By default Advanced Button Monitor is using built-in config (you can find it in
 config.py file) that supports the following things:
 
 	- Controlling default music player from lockscreen using Volume Up/Down
-	- Taking pictures with default camera app using Volume Up
+	- Taking pictures (and focusing) with default camera app using Volume Up
 	- Taking pictures with 'Front Camera N9 (video+)' using Volume Up
 	- Taking pictures with 'rawcam' using Volume Up
+	- Focusing with proximity sensor in default camera app
 
 You can create custom config file (where you can change button actions and some
 general settings) that application will use instead of built-in config. Place

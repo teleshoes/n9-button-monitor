@@ -1,3 +1,12 @@
+adv-button-monitor (1.0.8) unstable; urgency=low
+
+  * Added proximity sensor "button"
+  * Changed button's params handling in config
+  * Added focusing with proximity sensor in default camera app
+  * Removed config auto-refresh on every key click
+
+ -- Lcferrum <lcferrum@yandex.com>  Wed, 20 Feb 2013 21:56:52 +0400
+
 adv-button-monitor (1.0.7) unstable; urgency=low
 
   * Initial release based on n9-button-monitor 0.5.1 with few modifications.

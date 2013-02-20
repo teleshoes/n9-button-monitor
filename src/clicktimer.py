@@ -111,7 +111,7 @@ class ClickTimer(QWidget):
   def schedule(self, time):
     self.timer.start(time, self)
   def click(self, clickType):
-    #self.reset()
+    self.reset()
     #self.config.checkConfigFile()
     print >> sys.stderr, str(self.key) + ": " + clickType
 

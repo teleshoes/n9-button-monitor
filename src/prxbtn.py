@@ -18,33 +18,26 @@ from QtMobility import Sensors
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-class ProximityFilter(Sensors.QProximityFilter):
-	def __init__(self, eventHandler):
- 		super(ProximityFilter, self).__init__()
-		self.eventHandler = eventHandler
-	def filter(self, reading):
-		self.eventHandler(reading.close())
-		return False
-
-class ProximityButton():
+class ProximityButton(Sensors.QProximityFilter):
 	def __init__(self):
+ 		super(ProximityButton, self).__init__()
 		self.handler = self.defaultHandler
 		self.last_close = False
 	def defaultHandler(self, state):
 		print >> sys.stderr, "Proximity sensor event: " + state
 	def setHandler(self, handler):
 		self.handler = handler
-	def proximityEvent(self, close):
-		if close != self.last_close:
-			if close:
+	def filter(self, reading):
+		if reading.close() != self.last_close:
+			if reading.close():
 				self.handler("proximityEnter")
 			else:
 				self.handler("proximityLeave")
-			self.last_close = close
+			self.last_close = reading.close()
+		return False
 	def connectProximityButton(self):
 		self.prox = Sensors.QProximitySensor()
-		self.filter = ProximityFilter(self.proximityEvent)
-		self.prox.addFilter(self.filter)
+		self.prox.addFilter(self)
 		self.prox.start()
 		if not self.prox.isActive():
 			print >> sys.stderr, "Proximity sensor didn't start!"

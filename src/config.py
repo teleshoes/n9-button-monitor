@@ -70,6 +70,7 @@ class Config():
       + "action=clickCameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
       + "action=clickCameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
       + "action=clickCameraSnap,volumeUp,singleClick,cameraAppFocused\n"
+      + "action=clickCameraFocus,proximitySensor,proximityEnter,cameraAppFocused\n"
       + "action=tap(69x67,69x67),volumeUp,singleClick,appFocused(frontcameravideo)\n"
       + "action=tap(802x253,802x253),volumeUp,singleClick,appFocused(rawcam)\n"
       )
