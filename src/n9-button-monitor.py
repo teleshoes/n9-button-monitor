@@ -1,6 +1,7 @@
 #!/usr/bin/python
 #N9 Button Monitor
 #Copyright (C) 2012 Elliot Wolk
+#Copyright (C) 2013 Lcferrum
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License as published by
@@ -48,7 +49,12 @@ def main():
 
 def dbusBtnClicked(config, button):
   actionMaps = config.getActionMapSet()
-  for a in actionMaps.getActionMapsForDbus(button):
+  for a in actionMaps.getActionMapsForKey("dbusMessage", button):
+    a.maybeRun()
+	
+def prxBtnClicked(config, state):
+  actionMaps = config.getActionMapSet()
+  for a in actionMaps.getActionMapsForKey("proximitySensor", state):
     a.maybeRun()
 
 def startMonitor():
@@ -73,6 +79,9 @@ def startMonitor():
   config.dbusButton.setHandler(
     lambda button: dbusBtnClicked(config, button))
   config.dbusButton.connectButtonDbus()
+  config.proximityButton.setHandler(
+    lambda state: prxBtnClicked(config, state))
+  config.proximityButton.connectProximityButton()
   app.exec_()
 
 if __name__ == "__main__":

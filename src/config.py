@@ -13,6 +13,7 @@
 
 from clicktimer import getButtons
 from dbusbtn import DbusButton
+from prxbtn import ProximityButton
 
 import sys
 import os
@@ -30,6 +31,7 @@ class Config():
     self.validButtonNames = validButtonNames
     self.validClickTypeNames = validClickTypeNames
     self.dbusButton = DbusButton()
+    self.proximityButton = ProximityButton()
     self.lastTimeStamp = None
     self.resetConfig()
     self.initRegex()
@@ -163,13 +165,16 @@ class Config():
 class ActionMapSet():
   def __init__(self, actionMaps):
     self.actionMaps = actionMaps
-    self.actionMapsByDbusButton = dict()
     self.actionMapsByKeyByClickType = dict()
     for a in actionMaps:
-      if a.button == "dbus":
-        if not a.buttonParam in self.actionMapsByDbusButton:
-          self.actionMapsByDbusButton[a.buttonParam] = []
-        self.actionMapsByDbusButton[a.buttonParam].append(a)
+      if a.key == a.clickType:
+        if a.buttonParam != None:
+          if not a.buttonParam in self.actionMapsByKeyByClickType:
+            self.actionMapsByKeyByClickType[a.buttonParam] = dict()
+          actionMapsByKey = self.actionMapsByKeyByClickType[a.buttonParam]
+          if not a.key in actionMapsByKey:
+            actionMapsByKey[a.key] = []
+          actionMapsByKey[a.key].append(a)
       else:
         if not a.clickType in self.actionMapsByKeyByClickType:
           self.actionMapsByKeyByClickType[a.clickType] = dict()
@@ -177,11 +182,6 @@ class ActionMapSet():
         if not a.key in actionMapsByKey:
           actionMapsByKey[a.key] = []
         actionMapsByKey[a.key].append(a)
-  def getActionMapsForDbus(self, button):
-    if not button in self.actionMapsByDbusButton:
-      return []
-    else:
-      return self.actionMapsByDbusButton[button]
   def getActionMapsForKey(self, key, clickType):
     if not clickType in self.actionMapsByKeyByClickType:
       return []

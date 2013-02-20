@@ -28,14 +28,17 @@ BUTTON_POWER = 20
 
 def getClickTypes():
   return ["singleClick","doubleClick","trebleClick",
-          "longClickStart","longClickStop"]
+          "longClickStart","longClickStop",
+          "proximityEnter","proximityLeave",
+          "dbusMessage"]
 
 def getButtons():
   return { "volumeUp": BUTTON_VOLUME_UP
          , "volumeDown": BUTTON_VOLUME_DOWN
          , "cameraButton": BUTTON_N950CAMKEY
          , "powerButton": BUTTON_POWER
-         , "dbus": "dbus"}
+         , "dbus": "dbusMessage"
+         , "proximitySensor": "proximitySensor"}
 
 ###############
 
@@ -108,8 +111,8 @@ class ClickTimer(QWidget):
   def schedule(self, time):
     self.timer.start(time, self)
   def click(self, clickType):
-    self.reset()
-    self.config.checkConfigFile()
+    #self.reset()
+    #self.config.checkConfigFile()
     print >> sys.stderr, str(self.key) + ": " + clickType
 
     actionMaps = self.config.getActionMapSet()
