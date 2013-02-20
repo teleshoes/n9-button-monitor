@@ -16,6 +16,10 @@ Files: */dbusbtn.py
 Copyright: 2012, Elliot Wolk
 License: GPL-3
 
+Files: */prxbtn.py
+Copyright: 2013, Lcferrum
+License: GPL-3
+
 License: GPL-3
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
