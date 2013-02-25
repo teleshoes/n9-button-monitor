@@ -11,7 +11,7 @@ Architecture: armel
 Depends: python, xresponse, x11-utils, alsa-utils, python-dbus, python-qmsystem, python-qtmobility.multimediakit, python-qtmobility.sensors, python-qtmobility.systeminfo, python-pyside.qtgui, python-pyside.qtcore
 Section: user/other
 Priority: extra
-Description: Toggleable Nokia N9 Volume Button Actions. Based on n9-button-monitor 0.5.1 by teleshoes (elliot.wolk@gmail.com).
+Description: Toggleable Nokia N9 Volume Button Actions. Based on n9-button-monitor 0.5.2 by teleshoes (elliot.wolk@gmail.com).
 XB-Maemo-Display-Name: Advanced Button Monitor
 XB-Maemo-Icon-26: 
  iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsSAAALEgHS3X78AAAT

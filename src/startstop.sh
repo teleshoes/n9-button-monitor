@@ -11,8 +11,8 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 if pkill -f n9-button-monitor\.py; then
-	sed -i s/on\.png/off\.png/ /usr/share/applications/adv-button-monitor.desktop
+	cat /opt/adv-button-monitor/data/off.desktop >/usr/share/applications/adv-button-monitor.desktop
 else
-	sed -i s/off\.png/on\.png/ /usr/share/applications/adv-button-monitor.desktop
-	/opt/adv-button-monitor/n9-button-monitor.py
+	cat /opt/adv-button-monitor/data/on.desktop >/usr/share/applications/adv-button-monitor.desktop
+	/opt/adv-button-monitor/bin/n9-button-monitor.py
 fi

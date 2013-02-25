@@ -18,7 +18,11 @@ all:
 
 install:
 	mkdir -p $(DESTDIR)/opt/$(APP_NAME)/
-	cp $(SOURCE)/*.sh $(SOURCE)/*.py $(DESTDIR)/opt/$(APP_NAME)/
+	mkdir -p $(DESTDIR)/opt/$(APP_NAME)/bin/
+	mkdir -p $(DESTDIR)/opt/$(APP_NAME)/data/
+	cp $(SOURCE)/*.sh $(SOURCE)/*.py $(DESTDIR)/opt/$(APP_NAME)/bin/
+	cp $(DATA)/off.desktop $(DESTDIR)/opt/$(APP_NAME)/data/
+	cp $(DATA)/on.desktop $(DESTDIR)/opt/$(APP_NAME)/data/
 	mkdir -p $(DESTDIR)/usr/share/applications/
 	cp $(DATA)/$(APP_NAME).desktop $(DESTDIR)/usr/share/applications/
 	mkdir -p $(DESTDIR)/usr/share/icons/hicolor/80x80/apps/

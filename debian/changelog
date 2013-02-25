@@ -1,7 +1,6 @@
 adv-button-monitor (1.0.9) unstable; urgency=low
 
   * Now based on n9-button-monitor 0.5.2
-  * Toggle is now based on sed instead of cat (merged from 0.5.2)
   * Added two new conditions: screenUnlocked and appNotFocused (merged from 0.5.2)
   * Moved non-executables from src to data (merged from 0.5.2)
   * Added more examples to n9-button-monitor.ini

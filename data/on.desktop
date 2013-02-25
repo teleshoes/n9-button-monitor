@@ -2,4 +2,4 @@
 Type=Application
 Name=ButtonMonitor
 Exec=/bin/sh /opt/adv-button-monitor/bin/startstop.sh
-Icon=/usr/share/icons/hicolor/80x80/apps/adv-button-monitor-off.png
+Icon=/usr/share/icons/hicolor/80x80/apps/adv-button-monitor-on.png
