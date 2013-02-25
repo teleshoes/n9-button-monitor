@@ -43,8 +43,10 @@ class ActionDict():
 
     self.conditionLambdaDict = (
       { "screenLocked": lambda: QSystemDeviceInfo().isDeviceLocked()
+      , "screenUnlocked": lambda: not QSystemDeviceInfo().isDeviceLocked()
       , "cameraAppFocused": lambda: isAppOnTop("camera-ui")
       , "appFocused": lambda x: lambda: isAppOnTop(x)
+      , "appNotFocused": lambda x: lambda: not isAppOnTop(x)
       , "always": lambda: True
       })
 
