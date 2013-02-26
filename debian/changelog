@@ -1,6 +1,6 @@
 n9-button-monitor (0.5.2); urgency=low
-  * add powerButton and n950 cameraButton
-  * config option to disable camera functions {quicksnap and torch}
+  * (Lcferrum) add powerButton and n950 cameraButton
+  * (Lcferrum) config option to disable camera functions {quicksnap and torch}
   * added conditions screenUnlocked and appNotFocused
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 23 Feb 2013 21:12:00 +0100
 
