@@ -1,3 +1,8 @@
+n9-button-monitor (0.5.3) UNRELEASED; urgency=low
+  * (Lcferrum) proximity sensor buttons
+  * (Lcferrum) make dbus a click type instead of a red-haired stepchild
+ -- teleshoes <elliot.wolk@gmail.com>
+
 n9-button-monitor (0.5.2); urgency=low
   * (Lcferrum) add powerButton and n950 cameraButton
   * (Lcferrum) config option to disable camera functions {quicksnap and torch}
