@@ -7,7 +7,7 @@ install(
 
 install(
   FILES
-    n9bm-gui.desktop
+    n9-button-monitor.desktop
   DESTINATION
     /usr/share/applications
 )
@@ -15,8 +15,10 @@ install(
 install(
   FILES
     startstop.sh
+    off.desktop
+    on.desktop
   DESTINATION
-    /opt/n9-button-monitor
+    /opt/n9-button-monitor/bin
 )
 
 install(
