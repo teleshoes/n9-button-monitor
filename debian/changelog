@@ -3,40 +3,40 @@ n9-button-monitor (0.5.3) UNRELEASED; urgency=low
   * (Lcferrum) make dbus a click type instead of a red-haired stepchild
  -- teleshoes <elliot.wolk@gmail.com>
 
-n9-button-monitor (0.5.2); urgency=low
+n9-button-monitor (0.5.2) unstable; urgency=low
   * (Lcferrum) add powerButton and n950 cameraButton
   * (Lcferrum) config option to disable camera functions {quicksnap and torch}
   * added conditions screenUnlocked and appNotFocused
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 23 Feb 2013 21:12:00 +0100
 
-n9-button-monitor (0.5.1); urgency=low
+n9-button-monitor (0.5.1) unstable; urgency=low
   * add quick snap
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 12 Jan 2013 16:43:58 +0100
 
-n9-button-monitor (0.5.0); urgency=low
+n9-button-monitor (0.5.0) unstable; urgency=low
   * add dbus buttons for bluetooth speakers
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 06 Jan 2013 15:31:54 +0100
 
-n9-button-monitor (0.4.5); urgency=low
+n9-button-monitor (0.4.5) unstable; urgency=low
   * rotate screenShot 90 degrees, portrait is better default
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
 
-n9-button-monitor (0.4.4); urgency=low
+n9-button-monitor (0.4.4) unstable; urgency=low
   * added condition=always and action=screenShot
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
 
-n9-button-monitor (0.4.3); urgency=low
+n9-button-monitor (0.4.3) unstable; urgency=low
   * Configuration GUI
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
 
-n9-button-monitor (0.4.2); urgency=low
+n9-button-monitor (0.4.2) unstable; urgency=low
   * Configuration GUI
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 28 Apr 2012 18:17:22 +0100
 
-n9-button-monitor (0.4.1); urgency=low
+n9-button-monitor (0.4.1) unstable; urgency=low
   * AEGIS-tastic
  -- teleshoes <elliot.wolk@gmail.com>  Tue, 16 Apr 2012 13:07:08 +0100
 
-n9-button-monitor (0.4.0); urgency=low
+n9-button-monitor (0.4.0) unstable; urgency=low
   * Initial release.
  -- teleshoes <elliot.wolk@gmail.com>  Mon, 14 Apr 2012 16:15:48 +0100
