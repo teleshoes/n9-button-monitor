@@ -1,13 +1,19 @@
 #!/usr/bin/python
 #N9 Button Monitor
-#Copyright 2012 Elliot Wolk
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#Copyright (C) 2013 Elliot Wolk
+#Copyright (C) 2013 Lcferrum
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from clicktimer import getButtons
 from dbusbtn import DbusButton
+from prxbtn import ProximityButton
 
 import sys
 import os
@@ -25,6 +31,7 @@ class Config():
     self.validButtonNames = validButtonNames
     self.validClickTypeNames = validClickTypeNames
     self.dbusButton = DbusButton()
+    self.proximityButton = ProximityButton()
     self.lastTimeStamp = None
     self.resetConfig()
     self.initRegex()
@@ -63,6 +70,9 @@ class Config():
       + "action=clickCameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
       + "action=clickCameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
       + "action=clickCameraSnap,volumeUp,singleClick,cameraAppFocused\n"
+      + "action=clickCameraFocus,proximitySensor,proximityEnter,cameraAppFocused\n"
+      + "action=tap(69x67,69x67),volumeUp,singleClick,appFocused(frontcameravideo)\n"
+      + "action=tap(802x253,802x253),volumeUp,singleClick,appFocused(rawcam)\n"
       )
 
   def resetConfig(self):
@@ -159,10 +169,14 @@ class ActionMapSet():
     self.actionMapsByDbusButton = dict()
     self.actionMapsByKeyByClickType = dict()
     for a in actionMaps:
-      if a.button == "dbus":
-        if not a.buttonParam in self.actionMapsByDbusButton:
-          self.actionMapsByDbusButton[a.buttonParam] = []
-        self.actionMapsByDbusButton[a.buttonParam].append(a)
+      if a.key == a.clickType:
+        if a.buttonParam != None:
+          if not a.buttonParam in self.actionMapsByKeyByClickType:
+            self.actionMapsByKeyByClickType[a.buttonParam] = dict()
+          actionMapsByKey = self.actionMapsByKeyByClickType[a.buttonParam]
+          if not a.key in actionMapsByKey:
+            actionMapsByKey[a.key] = []
+          actionMapsByKey[a.key].append(a)
       else:
         if not a.clickType in self.actionMapsByKeyByClickType:
           self.actionMapsByKeyByClickType[a.clickType] = dict()

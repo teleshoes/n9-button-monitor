@@ -1,10 +1,15 @@
 #!/usr/bin/python
 #N9 Button Monitor
-#Copyright 2012 Elliot Wolk
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#Copyright (C) 2013 Elliot Wolk
+#Copyright (C) 2013 Lcferrum
+#
+#This program is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+#You should have received a copy of the GNU General Public License
+#along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from PySide.QtGui import QWidget
 from PySide.QtCore import QBasicTimer
@@ -23,14 +28,17 @@ BUTTON_POWER = 20
 
 def getClickTypes():
   return ["singleClick","doubleClick","trebleClick",
-          "longClickStart","longClickStop"]
+          "longClickStart","longClickStop",
+          "proximityEnter","proximityLeave",
+          "dbusMessage"]
 
 def getButtons():
   return { "volumeUp": BUTTON_VOLUME_UP
          , "volumeDown": BUTTON_VOLUME_DOWN
          , "cameraButton": BUTTON_N950CAMKEY
          , "powerButton": BUTTON_POWER
-         , "dbus": "dbus"}
+         , "dbus": "dbusMessage"
+         , "proximitySensor": "proximitySensor"}
 
 ###############
 
@@ -104,7 +112,7 @@ class ClickTimer(QWidget):
     self.timer.start(time, self)
   def click(self, clickType):
     self.reset()
-    self.config.checkConfigFile()
+    #self.config.checkConfigFile()
     print >> sys.stderr, str(self.key) + ": " + clickType
 
     actionMaps = self.config.getActionMapSet()

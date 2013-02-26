@@ -1,3 +1,3 @@
 #!/bin/sh
-/sbin/start apps/n9-button-monitor
+chmod 666 /usr/share/applications/adv-button-monitor.desktop
 exit 0
