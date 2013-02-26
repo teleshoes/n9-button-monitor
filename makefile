@@ -17,6 +17,7 @@ DEST_BIN = $(DESTDIR)/opt/$(APP_NAME)/bin/
 DEST_DATA = $(DESTDIR)/opt/$(APP_NAME)/data/
 DEST_ICONS = $(DESTDIR)/usr/share/icons/hicolor/80x80/apps/
 DEST_DESKTOP = $(DESTDIR)/usr/share/applications/
+DEST_UPSTART = $(DESTDIR)/etc/init.d/apps/
 
 all:
 	true
@@ -32,6 +33,7 @@ install:
 	cp $(DATA)/on.desktop $(DEST_DATA)
 	cp $(DATA)/*.png $(DEST_ICONS)
 	cp $(DATA)/$(APP_NAME).desktop $(DEST_DESKTOP)
+	cp $(DATA)/$(APP_NAME).conf $(DEST_UPSTART)
 
 .PHONY: all install
 
