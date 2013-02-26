@@ -13,20 +13,25 @@ APP_NAME = n9-button-monitor
 SOURCE = src
 DATA = data
 
+DEST_BIN = $(DESTDIR)/opt/$(APP_NAME)/bin/
+DEST_DATA = $(DESTDIR)/opt/$(APP_NAME)/data/
+DEST_ICONS = $(DESTDIR)/usr/share/icons/hicolor/80x80/apps/
+DEST_DESKTOP = $(DESTDIR)/usr/share/applications/
+
 all:
 	true
 
 install:
-	mkdir -p $(DESTDIR)/opt/$(APP_NAME)/
-	mkdir -p $(DESTDIR)/opt/$(APP_NAME)/bin/
-	mkdir -p $(DESTDIR)/opt/$(APP_NAME)/data/
-	cp $(SOURCE)/*.sh $(SOURCE)/*.py $(DESTDIR)/opt/$(APP_NAME)/bin/
-	cp $(DATA)/off.desktop $(DESTDIR)/opt/$(APP_NAME)/data/
-	cp $(DATA)/on.desktop $(DESTDIR)/opt/$(APP_NAME)/data/
-	mkdir -p $(DESTDIR)/usr/share/applications/
-	cp $(DATA)/$(APP_NAME).desktop $(DESTDIR)/usr/share/applications/
-	mkdir -p $(DESTDIR)/usr/share/icons/hicolor/80x80/apps/
-	cp $(DATA)/*.png $(DESTDIR)/usr/share/icons/hicolor/80x80/apps/
+	mkdir -p $(DEST_BIN)
+	mkdir -p $(DEST_DATA)
+	mkdir -p $(DEST_ICONS)
+	mkdir -p $(DEST_UPSTART)
+	mkdir -p $(DEST_DESKTOP)
+	cp $(SOURCE)/*.sh $(SOURCE)/*.py $(DEST_BIN)
+	cp $(DATA)/off.desktop $(DEST_DATA)
+	cp $(DATA)/on.desktop $(DEST_DATA)
+	cp $(DATA)/*.png $(DEST_ICONS)
+	cp $(DATA)/$(APP_NAME).desktop $(DEST_DESKTOP)
 
 .PHONY: all install
 
