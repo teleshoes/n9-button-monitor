@@ -1,6 +1,6 @@
 #!/bin/sh
-#Advanced Button Monitor
-#Copyright (C) 2013 Lcferrum
+#N9 Button Monitor
+#Copyright (C) 2013 Elliot Wolk, Lcferrum
 #
 #This program is free software: you can redistribute it and/or modify
 #it under the terms of the GNU General Public License as published by
@@ -11,8 +11,8 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 if pkill -f n9-button-monitor\.py; then
-	cat /opt/adv-button-monitor/data/off.desktop >/usr/share/applications/adv-button-monitor.desktop
+	cat /opt/n9-button-monitor/data/off.desktop >/usr/share/applications/n9-button-monitor.desktop
 else
-	cat /opt/adv-button-monitor/data/on.desktop >/usr/share/applications/adv-button-monitor.desktop
-	/opt/adv-button-monitor/bin/n9-button-monitor.py
+	cat /opt/n9-button-monitor/data/on.desktop >/usr/share/applications/n9-button-monitor.desktop
+	/opt/n9-button-monitor/bin/n9-button-monitor.py
 fi
