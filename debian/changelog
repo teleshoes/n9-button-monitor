@@ -1,37 +1,37 @@
-n9-button-monitor (0.5.2) UNRELEASED; urgency=low
+n9-button-monitor (0.5.2); urgency=low
   * add powerButton and n950 cameraButton
   * config option to disable camera functions {quicksnap and torch}
   * added conditions screenUnlocked and appNotFocused
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 23 Feb 2013 21:12:00 +0100
 
-n9-button-monitor (0.5.1) UNRELEASED; urgency=low
+n9-button-monitor (0.5.1); urgency=low
   * add quick snap
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 12 Jan 2013 16:43:58 +0100
 
-n9-button-monitor (0.5.0) UNRELEASED; urgency=low
+n9-button-monitor (0.5.0); urgency=low
   * add dbus buttons for bluetooth speakers
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 06 Jan 2013 15:31:54 +0100
 
-n9-button-monitor (0.4.5) UNRELEASED; urgency=low
+n9-button-monitor (0.4.5); urgency=low
   * rotate screenShot 90 degrees, portrait is better default
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
 
-n9-button-monitor (0.4.4) UNRELEASED; urgency=low
+n9-button-monitor (0.4.4); urgency=low
   * added condition=always and action=screenShot
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
 
-n9-button-monitor (0.4.3) UNRELEASED; urgency=low
+n9-button-monitor (0.4.3); urgency=low
   * Configuration GUI
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 29 Apr 2012 23:30:54 +0100
 
-n9-button-monitor (0.4.2) UNRELEASED; urgency=low
+n9-button-monitor (0.4.2); urgency=low
   * Configuration GUI
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 28 Apr 2012 18:17:22 +0100
 
-n9-button-monitor (0.4.1) UNRELEASED; urgency=low
+n9-button-monitor (0.4.1); urgency=low
   * AEGIS-tastic
  -- teleshoes <elliot.wolk@gmail.com>  Tue, 16 Apr 2012 13:07:08 +0100
 
-n9-button-monitor (0.4.0) UNRELEASED; urgency=low
+n9-button-monitor (0.4.0); urgency=low
   * Initial release.
  -- teleshoes <elliot.wolk@gmail.com>  Mon, 14 Apr 2012 16:15:48 +0100
