@@ -14,6 +14,11 @@ bool N9BMToggle::isActive()
 void N9BMToggle::onToggleClicked()
 {
     m_isActive = !m_isActive;
+    system("pkill -f n9-button-monitor\\.py");
+    if(m_isActive)
+    {
+        system("/opt/n9-button-monitor/bin/n9-button-monitor.py &");
+    }
     emit stateChanged(m_isActive);
 }
 
