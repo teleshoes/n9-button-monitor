@@ -1,4 +1,5 @@
 n9-button-monitor (0.5.3) UNRELEASED; urgency=low
+  * add support for mt-toggles plugin
   * (Lcferrum) proximity sensor buttons
   * (Lcferrum) make dbus a click type instead of a red-haired stepchild
  -- teleshoes <elliot.wolk@gmail.com>  Sat, 23 Feb 2013 21:12:00 -0500
