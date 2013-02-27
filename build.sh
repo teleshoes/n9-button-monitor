@@ -12,10 +12,10 @@ if ! mount | grep $project; then
 fi
 
 
-/scratchbox/login -d $HOME find -maxdepth 1 -name $project*.deb -delete
-/scratchbox/login -d $HOME find -maxdepth 1 -name $project*.changes -delete
-/scratchbox/login -d $HOME find -maxdepth 1 -name $project*.dsc -delete
-/scratchbox/login -d $HOME find -maxdepth 1 -name $project*.gz -delete
+/scratchbox/login -d $HOME find -maxdepth 2 -name $project*.deb -delete
+/scratchbox/login -d $HOME find -maxdepth 2 -name $project*.changes -delete
+/scratchbox/login -d $HOME find -maxdepth 2 -name $project*.dsc -delete
+/scratchbox/login -d $HOME find -maxdepth 2 -name $project*.gz -delete
 
 /scratchbox/login -d $HOME/$project dpkg-buildpackage
 
