@@ -3,7 +3,7 @@ project="n9-button-monitor"
 dir=$HOME/Code/$project
 mnt=/scratchbox/users/$USER/home/$USER/$project
 
-if ! mount | grep $project; then
+if ! mount | grep "$project on $mnt"; then
   sudo /scratchbox/sbin/sbox_ctl start
   sudo /scratchbox/sbin/sbox_sync
 
