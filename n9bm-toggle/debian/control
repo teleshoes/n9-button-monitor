@@ -1,0 +1,13 @@
+Source: n9bm-toggle
+Section: user/other
+Priority: optional
+Maintainer: Elliot Wolk <elliot.wolk@gmail.com>
+Build-Depends: debhelper (>= 5), libqt4-dev
+Standards-Version: 3.7.3
+
+Package: n9bm-toggle
+Section: user/other
+Architecture: any
+Priority: optional
+Depends: mt-toggles
+Description: N9 Button Monitor toggle for MT-Toggles

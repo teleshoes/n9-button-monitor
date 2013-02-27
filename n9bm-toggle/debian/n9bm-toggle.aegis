@@ -1,0 +1,7 @@
+<aegis>
+	<request policy="add">
+		<credential name="mce::DeviceModeControl" />
+                <for path="system-ui::/usr/bin/sysuid" />
+	</request>
+</aegis>
+
