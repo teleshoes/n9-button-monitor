@@ -11,7 +11,8 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from config import Config, ActionMap, getConfigFilePath
+from config import (Config, ActionMap,
+  getUserConfigFilePath, getSystemConfigFilePath)
 from actions import ActionDict
 from clicktimer import getButtons, getClickTypes
 
@@ -28,9 +29,10 @@ class GuiConfig():
     self.configPanel = ConfigPanel(self.actionDict)
   def createButtonPanel(self):
     panel = QHBoxLayout()
-    panel.addWidget(self.makeButton("Load Config File", self.loadConfigFile))
+    panel.addWidget(self.makeButton("Load Config File",
+      self.loadUserConfigFile))
     panel.addWidget(self.makeButton("Load Default Config",
-      self.loadConfigDefault))
+      self.loadSystemConfigFile))
     panel.addWidget(self.makeButton("Save Config File", self.saveConfig))
     panel.addWidget(self.makeButton("Add action row", self.addActionRow))
     return panel
@@ -54,8 +56,12 @@ class GuiConfig():
     widget.setLayout(mainPanel)
     widget.show()
     app.exec_()
-  def loadConfigFile(self):
-    confText = self.config.getConfigFileContent()
+  def loadUserConfigFile(self):
+    self.loadConfigFile(getUserConfigFilePath())
+  def loadSystemConfigFile(self):
+    self.loadConfigFile(getSystemConfigFilePath())
+  def loadConfigFile(self, confFile):
+    confText = self.config.readConf(confFile)
     if confText == None:
       msgBox = QMessageBox()
       msgBox.setText("Config file not found!")
@@ -63,7 +69,7 @@ class GuiConfig():
     else:
       self.loadConfig(confText)
   def loadConfigDefault(self):
-    self.loadConfig(self.config.getDefaultConfig())
+    self.loadConfig(self.config.readConf(getSystemConfigFilePath()))
   def loadConfig(self, confText):
     try:
       self.config.parse(confText)
@@ -79,7 +85,7 @@ class GuiConfig():
   def saveConfig(self):
     confText = self.configPanel.makeConfigText()
     self.loadConfig(confText)
-    open(getConfigFilePath(), 'w').write(confText)
+    open(getUserConfigFilePath(), 'w').write(confText)
     
     
 class ConfigPanel(QVBoxLayout):

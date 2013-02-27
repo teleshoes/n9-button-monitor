@@ -20,8 +20,10 @@ import os
 import re
 import subprocess
 
-def getConfigFilePath():
+def getUserConfigFilePath():
   return "/home/user/.config/n9-button-monitor.ini"
+def getSystemConfigFilePath():
+  return "/opt/n9-button-monitor/data/default-config.ini"
 
 class Config():
   def __init__(self, actionDict, validButtonNames, validClickTypeNames):
@@ -38,16 +40,17 @@ class Config():
   def checkConfigFile(self):
     timestamp = self.getTimeStamp()
     if self.lastTimeStamp == None or self.lastTimeStamp != timestamp:
+      print >> sys.stderr, "refreshing config"
+      self.ensureUserConf()
       try:
-        print >> sys.stderr, "refreshing config"
-        self.parseConfigFile()
+        self.parse(self.readConf(getUserConfigFilePath()))
       except:
-        print >> sys.stderr, "INVALID CONFIG, USING DEFAULT"
-        self.parse(self.getDefaultConfig())
+        print >> sys.stderr, "INVALID CONFIG, ATTEMPTING TO USE DEFAULT"
+        self.parse(self.readConf(getSystemConfigFilePath()))
     self.lastTimeStamp = timestamp 
   def getTimeStamp(self):
-    if os.path.isfile(getConfigFilePath()):
-      cmdArr = ["stat", "-t", getConfigFilePath()]
+    if os.path.isfile(getUserConfigFilePath()):
+      cmdArr = ["stat", "-t", getUserConfigFilePath()]
       out, err = subprocess.Popen(cmdArr, stdout=subprocess.PIPE).communicate()
       if err == None or len(err) == 0:
         return out
@@ -55,25 +58,6 @@ class Config():
         return "error"
     else:
       return "missing"
-  def getDefaultConfig(self):
-    return ("#DEFAULT CONFIG\n"
-      + "torchAutoShutOffTimeMs=300000\n"
-      + "longClickDelayMs=400\n"
-      + "doubleClickDelayMs=400\n"
-      + "trebleClickDelayMs=600\n"
-      + "dbusBufferMs=800\n"
-      + "action=torchOn,volumeUp,longClickStart,screenLocked\n"
-      + "action=torchOff,volumeUp,longClickStop,screenLocked\n"
-      + "action=musicPlayPause,volumeUp,singleClick,screenLocked\n"
-      + "action=musicNext,volumeDown,singleClick,screenLocked\n"
-      + "action=musicPrev,volumeDown,doubleClick,screenLocked\n"
-      + "action=clickCameraFocus,volumeUp,longClickStart,cameraAppFocused\n"
-      + "action=clickCameraSnap,volumeUp,longClickStop,cameraAppFocused\n"
-      + "action=clickCameraSnap,volumeUp,singleClick,cameraAppFocused\n"
-      + "action=clickCameraFocus,proximitySensor,proximityEnter,cameraAppFocused\n"
-      + "action=tap(69x67,69x67),volumeUp,singleClick,appFocused(frontcameravideo)\n"
-      + "action=tap(802x253,802x253),volumeUp,singleClick,appFocused(rawcam)\n"
-      )
 
   def resetConfig(self):
     self.torchAutoShutOffTimeMs=300000
@@ -108,18 +92,19 @@ class Config():
       + "\\s*(#.*)?"
       + "$"
       )
-  def getConfigFileContent(self):
-    if os.path.isfile(getConfigFilePath()):
-      return open(getConfigFilePath(),"rb").read()
+  def readConf(self, confFile):
+    if os.path.isfile(confFile):
+      return open(confFile,"rb").read()
     else:
       return None
-  def parseConfigFile(self):
-    confText = self.getConfigFileContent()
-    if confText == None:
-      confText = self.getDefaultConfig()
-      print "WARNING: no config file at '" + getConfigFilePath() + "'"
-      print "Using default config:\n" + confText
-    self.parse(confText)
+
+  def ensureUserConf(self):
+    userConf = getUserConfigFilePath()
+    if not os.path.isfile(userConf):
+      print "WARNING: no config file at '" + userConf + "'"
+      print "Copying default config:\n"
+      os.system("cp " + getSystemConfigFilePath() + " " + userConf)
+
   def parse(self, confText):
     self.resetConfig()
     actionMaps = []
