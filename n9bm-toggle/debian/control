@@ -9,5 +9,5 @@ Package: n9bm-toggle
 Section: user/other
 Architecture: any
 Priority: optional
-Depends: mt-toggles
+Depends: mt-toggles, n9-button-monitor
 Description: N9 Button Monitor toggle for MT-Toggles
