@@ -28,11 +28,7 @@ install:
 	mkdir -p $(DEST_ICONS)
 	mkdir -p $(DEST_UPSTART)
 	mkdir -p $(DEST_DESKTOP)
-	cp $(SOURCE)/*.sh $(SOURCE)/*.py $(DEST_BIN)
-	cp $(DATA)/off.desktop $(DEST_DATA)
-	cp $(DATA)/on.desktop $(DEST_DATA)
-	cp $(DATA)/*.png $(DEST_ICONS)
-	cp $(DATA)/$(APP_NAME).desktop $(DEST_DESKTOP)
+	cp $(SOURCE)/*.py $(DEST_BIN)
 	cp $(DATA)/$(APP_NAME).conf $(DEST_UPSTART)
 
 .PHONY: all install
