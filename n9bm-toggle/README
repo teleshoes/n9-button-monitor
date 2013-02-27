@@ -1,0 +1,4 @@
+This is an mt-toggle for unrestricted sysui for n9-button-monitor.
+Build it in sbox like:
+qmake
+dpkg-buildpackage
