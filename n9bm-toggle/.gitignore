@@ -1,0 +1,10 @@
+/Makefile
+/build-stamp
+/configure-stamp
+/debian/files
+/debian/*.log
+/debian/*.substvars
+/debian/n9bm-toggle/
+/*.so
+/*.cpp
+/*.o
