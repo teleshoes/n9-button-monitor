@@ -29,6 +29,7 @@ install:
 	mkdir -p $(DEST_UPSTART)
 	mkdir -p $(DEST_DESKTOP)
 	cp $(SOURCE)/*.py $(DEST_BIN)
+	cp $(DATA)/*.ini $(DEST_DATA)
 	cp $(DATA)/*.desktop $(DEST_DESKTOP)
 	cp $(DATA)/$(APP_NAME).conf $(DEST_UPSTART)
 
