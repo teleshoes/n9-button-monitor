@@ -1,10 +1,10 @@
-n9-button-monitor (0.5.3) UNRELEASED; urgency=low
+n9-button-monitor (0.5.3) unstable; urgency=low
   * add support for mt-toggles plugin
   * copy default-config when there is no user config file
   * move default-config to data/ instead of maintaining it in two places
   * (Lcferrum) proximity sensor buttons
   * (Lcferrum) make dbus a click type instead of a red-haired stepchild
- -- teleshoes <elliot.wolk@gmail.com>  Sat, 23 Feb 2013 21:12:00 -0500
+ -- teleshoes <elliot.wolk@gmail.com>  Sat, 02 Mar 2013 12:58:33 -0500
 
 n9-button-monitor (0.5.2) unstable; urgency=low
   * (Lcferrum) add powerButton and n950 cameraButton
