@@ -24,6 +24,12 @@ int N9BMToggle::run(QString cmd, QStringList args, bool wait)
       return p.exitCode();
 }
 
+int N9BMToggle::killSignal(QString sig)
+{
+    return run("pkill", QStringList()
+      << ("-" + sig) << "-f" << ("/usr/bin/python " + N9BM_BIN), true);
+}
+
 bool N9BMToggle::isActive()
 {
     return m_isActive;
@@ -32,7 +38,7 @@ bool N9BMToggle::isActive()
 void N9BMToggle::onToggleClicked()
 {
     m_isActive = !m_isActive;
-    system("pkill -f " + N9BM_BIN.toStdString().c_str());
+    killSignal("SIGTERM");
     if(m_isActive)
     {
         system(N9BM_BIN.toStdString().c_str() +" &");

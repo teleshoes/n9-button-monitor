@@ -22,6 +22,7 @@ public:
     QString toggleIconId() { return "icon-m-bluetooth-carkit"; }
 
     int run(QString cmd, QStringList args, bool wait);
+    int killSignal(QString sig);
     bool isActive();
 
 private:
