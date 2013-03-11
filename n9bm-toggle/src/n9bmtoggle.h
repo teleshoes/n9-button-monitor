@@ -21,6 +21,7 @@ public:
     QImage toggleIcon() { return QImage(); }
     QString toggleIconId() { return "icon-m-bluetooth-carkit"; }
 
+    int run(QString cmd, QStringList args, bool wait);
     bool isActive();
 
 private:

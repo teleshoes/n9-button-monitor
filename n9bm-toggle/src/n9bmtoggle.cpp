@@ -1,4 +1,5 @@
 #include "n9bmtoggle.h"
+#include <QProcess>
 
 const QString N9BMToggle::N9BM_BIN =
   QString("/opt/n9-button-monitor/bin/n9-button-monitor.py");
@@ -7,6 +8,20 @@ N9BMToggle::N9BMToggle(QObject *parent) :
     QObject(parent),
     m_isActive(false)
 {
+}
+
+int N9BMToggle::run(QString cmd, QStringList args, bool wait)
+{
+    QProcess p;
+    if(wait)
+      p.start(cmd, args);
+    else
+      p.startDetached(cmd, args);
+
+    if(!wait || !p.waitForFinished())
+      return -1;
+    else
+      return p.exitCode();
 }
 
 bool N9BMToggle::isActive()
