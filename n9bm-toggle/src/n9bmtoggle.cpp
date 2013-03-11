@@ -36,13 +36,11 @@ bool N9BMToggle::isActive()
 
 void N9BMToggle::onToggleClicked()
 {
-    bool m_isActive = !isActive();
+    bool active = !isActive();
     killSignal("SIGTERM");
-    if(m_isActive)
-    {
-        system(N9BM_BIN.toStdString().c_str() +" &");
-    }
-    emit stateChanged(m_isActive);
+    if(active)
+        run(N9BM_BIN, QStringList(), false);
+    emit stateChanged(active);
 }
 
 Q_EXPORT_PLUGIN2(n9bmtoggle, N9BMToggle)
