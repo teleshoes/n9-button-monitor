@@ -34,4 +34,4 @@ signals:
     void isWorkingStateChanged(bool working);
 };
 
-#endif // PSMTOGGLE_H
+#endif // N9BMTOGGLE_H
