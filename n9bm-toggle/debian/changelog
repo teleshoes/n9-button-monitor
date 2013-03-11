@@ -1,4 +1,4 @@
-n9bm-toggle (0.2) UNRELEASED; urgency=low
+n9bm-toggle (0.2) unstable; urgency=low
 
   * Proper detection of is-active.
 
