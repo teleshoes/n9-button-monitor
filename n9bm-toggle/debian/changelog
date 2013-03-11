@@ -1,3 +1,9 @@
+n9bm-toggle (0.2) UNRELEASED; urgency=low
+
+  * Proper detection of is-active.
+
+ -- Elliot Wolk <elliot.wolk@gmail.com>  Mon, 11 Mar 2013 05:11:55 -0500
+
 n9bm-toggle (0.1) unstable; urgency=low
 
   * Initial Release.
