@@ -10,6 +10,8 @@ class N9BMToggle : public QObject, public MTAbstractToggle
     Q_OBJECT
     Q_INTERFACES(MTAbstractToggle)
 public:
+    static const QString N9BM_BIN;
+
     N9BMToggle(QObject *parent = NULL);
     bool isToggle() { return true; }
 
