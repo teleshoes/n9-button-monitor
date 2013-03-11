@@ -25,8 +25,6 @@ public:
     int killSignal(QString sig);
     bool isActive();
 
-private:
-    bool m_isActive;
 
 public slots:
     void onToggleClicked();

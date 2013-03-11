@@ -5,8 +5,7 @@ const QString N9BMToggle::N9BM_BIN =
   QString("/opt/n9-button-monitor/bin/n9-button-monitor.py");
 
 N9BMToggle::N9BMToggle(QObject *parent) :
-    QObject(parent),
-    m_isActive(false)
+    QObject(parent)
 {
 }
 
@@ -32,12 +31,12 @@ int N9BMToggle::killSignal(QString sig)
 
 bool N9BMToggle::isActive()
 {
-    return m_isActive;
+    return 0 == killSignal("0");
 }
 
 void N9BMToggle::onToggleClicked()
 {
-    m_isActive = !m_isActive;
+    bool m_isActive = !isActive();
     killSignal("SIGTERM");
     if(m_isActive)
     {
