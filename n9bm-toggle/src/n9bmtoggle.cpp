@@ -54,6 +54,7 @@ void N9BMToggle::onToggleClicked()
 
 void N9BMToggle::onApplicationActivate()
 {
+  emit stateChanged(isActive());
 }
 
 Q_EXPORT_PLUGIN2(n9bmtoggle, N9BMToggle)
