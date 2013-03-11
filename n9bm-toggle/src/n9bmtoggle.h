@@ -25,9 +25,12 @@ public:
     int killSignal(QString sig);
     bool isActive();
 
+protected:
+     bool eventFilter(QObject *obj, QEvent *event);
 
 public slots:
     void onToggleClicked();
+    void onApplicationActivate();
 
 signals:
     void stateChanged(bool state);
