@@ -14,52 +14,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 2. About
 --------
-N9 Button Monitor is toggleable daemon for Nokia N9/N950 that monitors
+N9 Button Monitor is a daemon for Nokia N9/N950 that monitors
 hardware buttons and performs certain actions (defined in ini file) on clicks.
 
 Actions are performed conditionally based on type of click (single, double,
 etc.) and context (certain app is launched, screen is locked, etc.).
 
-It is written in python.
+There is a separate package for adding a toggle to the status menu.
 
-3. Where to get
+3. Download
 ---------------
-	https://github.com/teleshoes/n9-button-monitor
+    https://sourceforge.net/projects/n9buttonmonitor/files/
 
 4. Usage
 --------
 Install the .deb on your device (don't forget to allow installation from
-non-Store sources in the Settings). As usual an icon will be placed on your
-homescreen. Click it and it will turn red - the daemon is now running and
-monitoring buttons. Click it once more and the icon will revert back to green,
-which means that daemon is now stopped.
+non-Store sources in the Settings). 
 
-By default N9 Button Monitor is using built-in config (you can find it in
-config.py file) that supports the following things:
+It is automatically started at boot, and by default adds torch and music player
+controls to the lockscreen, and makes the Vol+ button a physical camera button
+in the camera app.
 
-	- Controlling default music player from lockscreen using Volume Up/Down
-	- Taking pictures (and focusing) with default camera app using Volume Up
-	- Taking pictures with 'Front Camera N9 (video+)' using Volume Up
-	- Taking pictures with 'rawcam' using Volume Up
-	- Focusing with proximity sensor in default camera app
-
-You can create custom config file (where you can change button actions and some
-general settings) that application will use instead of built-in config. Place
-it here:
+There is a user interface for adding/removing actions and conditions, but its
+easier to just edit the config file, which is located here:
 
 	/home/user/.config/n9-button-monitor.ini
-	
-Example config (n9-button-monitor.ini), which also highlights other features
-and capabilities of N9 Button Monitor, is included with the sources. 
 
 5. Building
 -----------
 The easiest way to build N9 Button Monitor is by using MeeGo 1.2
-Harmattan Platform SDK provided by Nokia. Just make sure that you have
-installed Platform SDK correctly, start scratchbox, select HARMATTAN_ARMEL
-target, switch to sources directory and type:
-
-	dpkg-buildpackage -rfakeroot
-
-You can also use other means of building .deb packages (e.g. PySide Assistant
-or PyPackager) but they are not supported by the current distribution.
+Harmattan Platform SDK provided by Nokia. See instructions from Nokia on how to
+install scratchbox and the SDK. Start scratchbox, select HARMATTAN_ARMEL
+target, and run dpkg-buildpackage.
