@@ -1,3 +1,7 @@
+n9-button-monitor (0.5.4) UNRELEASED; urgency=low
+  * fix regression: reload config file when it changes
+ -- teleshoes <elliot.wolk@gmail.com>  Sat, 02 Mar 2013 12:58:33 -0500
+
 n9-button-monitor (0.5.3) unstable; urgency=low
   * add support for mt-toggles plugin
   * copy default-config when there is no user config file
