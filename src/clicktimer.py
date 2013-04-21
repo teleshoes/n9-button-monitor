@@ -112,7 +112,7 @@ class ClickTimer(QWidget):
     self.timer.start(time, self)
   def click(self, clickType):
     self.reset()
-    #self.config.checkConfigFile()
+    self.config.checkConfigFile()
     print >> sys.stderr, str(self.key) + ": " + clickType
 
     actionMaps = self.config.getActionMapSet()
