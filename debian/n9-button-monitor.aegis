@@ -1,10 +1,28 @@
 <aegis>
+  <provide>
+    <credential name="control" />
+    <credential name="access" />
+    <dbus name="org.teleshoes.led" own="control" bus="system">
+      <node name="/">
+        <interface name="org.teleshoes.led">
+          <method name="led">
+            <annotation name="com.maemo.Aegis" value="access"/>
+          </method>
+        </interface>
+      </node>
+    </dbus>
+  </provide>
   <request>
+    <credential name="access" />
     <credential name="UID::user" />
     <credential name="GRP::users" />
     <credential name="GID::users" />
     <credential name="GRP::video" />
     <credential name="GRP::pulse-access" />
     <for path="/opt/n9-button-monitor/bin/n9-button-monitor.py" />
+  </request>
+  <request>
+    <credential name="control" />
+    <for path="/opt/n9-button-monitor/bin/led-dbus.py" />
   </request>
 </aegis>
