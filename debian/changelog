@@ -1,3 +1,9 @@
+n9-button-monitor (0.5.5) unstable; urgency=low
+  * Add separate config entries for quick-snap shutter and save sound
+  * Add LED dbus daemon for firing off LED event changes
+  * Add config entries for LED patterns for quick-snap shutter/save
+ -- teleshoes <elliot.wolk@gmail.com>  Thu, 29 Aug 2013 21:51:57 -0500
+
 n9-button-monitor (0.5.4) unstable; urgency=low
   * fix regression: reload config file when it changes
  -- teleshoes <elliot.wolk@gmail.com>  Sun, 21 Apr 2013 03:05:35 -0500
