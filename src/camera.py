@@ -55,12 +55,16 @@ class Camera():
       self.autoShutOff.schedule(500)
 
   def onShutter(self):
-    self.notify(self.config.quickSnapShutterSound)
+    self.notify(self.config.quickSnapShutterSound,
+      self.config.quickSnapShutterLedPattern)
   def onSave(self):
-    self.notify(self.config.quickSnapSaveSound)
-  def notify(self, snd):
+    self.notify(self.config.quickSnapSaveSound,
+      self.config.quickSnapSaveLedPattern)
+  def notify(self, snd, ledPattern):
     print snd
     try:
+      if ledPattern != None:
+        ledPattern.fire()
       if snd != None and len(snd) > 0:
         self.playSound(snd)
     except:
