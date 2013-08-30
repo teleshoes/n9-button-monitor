@@ -54,6 +54,18 @@ class Camera():
       self.autoShutOff = TorchAutoShutOff(self)
       self.autoShutOff.schedule(500)
 
+  def onShutter(self):
+    self.notify(self.config.quickSnapShutterSound)
+  def onSave(self):
+    self.notify(self.config.quickSnapSaveSound)
+  def notify(self, snd):
+    print snd
+    try:
+      if snd != None and len(snd) > 0:
+        self.playSound(snd)
+    except:
+      pass
+
   def setFlashMode(self, mode):
     self.qcam.exposure().setFlashMode(
       { "auto":   QCameraExposure.FlashAuto
@@ -71,11 +83,12 @@ class Camera():
       self.qcam.searchAndLock()
 
   def snap(self):
+    self.onShutter()
     self.imgCapture.capture(self.getPictureFile())
 
   def pictureSaved(self, picId, picFilename):
     print >>sys.stderr, 'saved picture: ' + picFilename
-    self.playSound()
+    self.onSave()
     self.unloadCamera()
 
   def error(self, errId, err, errStr):
@@ -90,11 +103,8 @@ class Camera():
     millis = int(round(time.time() * 1000))
     return "/home/user/MyDocs/DCIM/" + str(millis) + ".jpg"
 
-  def getSoundFile(self):
-    return "/usr/share/sounds/ui-tones/snd_camera_shutter.wav"
-
-  def playSound(self):
-    subprocess.Popen(["aplay", self.getSoundFile()])
+  def playSound(self, snd):
+    subprocess.Popen(["aplay", snd])
 
   def torchToggle(self):
     if self.torchState == "on":
