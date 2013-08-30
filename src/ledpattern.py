@@ -23,8 +23,14 @@ actions = (''
   + "  off: 0led synonym\n"
 )
 
+macros = { 'blink': 'on, 10ms, off'
+         , 'doubleblink': 'on, 10ms, off, 100ms, on, 10ms, off'
+         }
+
 class LedPattern():
   def __init__(self, ptrnStr):
+    if ptrnStr in macros:
+      ptrnStr = macros[ptrnStr]
     self.pattern = []
     for item in ptrnStr.split(','):
       action = self.getAction(item.strip())
