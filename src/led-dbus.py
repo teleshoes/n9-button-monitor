@@ -6,9 +6,8 @@
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 
-from PySide.QtGui import *
-from PySide.QtCore import *
 from dbus.mainloop.glib import DBusGMainLoop
+import gobject
 import dbus
 import dbus.service
 import sys
@@ -37,10 +36,9 @@ def main():
     print(usage)
     return 0
   else:
-    app = QApplication([])
     DBusGMainLoop(set_as_default=True)
     LedDbusService()
-    app.exec_()
+    gobject.MainLoop().run()
 
 def setLedBrightness(brightness):
   if 0 <= brightness and brightness <= 255:
