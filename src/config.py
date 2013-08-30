@@ -70,7 +70,7 @@ class Config():
 
 
   def initRegex(self):
-    self.integerRe = re.compile(
+    self.intRe = re.compile(
       "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>\d+)\\s*(#.*)?$")
     self.strRe = re.compile(
       "^\\s*(?P<key>[a-zA-Z0-9]+)" + "\\s*=\\s*" + "(?P<value>.*?)\\s*(#.*)?$")
@@ -110,13 +110,18 @@ class Config():
     actionMaps = []
     for line in confText.splitlines():
       actionMapMatch = self.actionMapRe.match(line)
-      integerMatch = self.integerRe.match(line)
+      intMatch = self.intRe.match(line)
+      strMatch = self.strRe.match(line)
       commentMatch = self.commentRe.match(line)
       emptyMatch = self.emptyRe.match(line)
-      key = None
-      if integerMatch != None:
-        key = integerMatch.group("key")
-        val = int(integerMatch.group("value"))
+      intKey = None
+      if intMatch != None:
+        intKey = intMatch.group("key")
+        intVal = int(intMatch.group("value"))
+      strKey = None
+      if strMatch != None:
+        strKey = strMatch.group("key")
+        strVal = strMatch.group("value")
 
       if actionMapMatch != None:
         actionMaps.append(ActionMap(
@@ -129,18 +134,18 @@ class Config():
           buttonParam = actionMapMatch.group("buttonParam"),
           clickType = actionMapMatch.group("clickType"),
         ))
-      elif key == "torchAutoShutOffTimeMs":
-        self.torchAutoShutOffTimeMs = val
-      elif key == "cameraDisabled":
-        self.cameraDisabled = val
-      elif key == "longClickDelayMs":
-        self.longClickDelayMs = val
-      elif key == "doubleClickDelayMs":
-        self.doubleClickDelayMs = val
-      elif key == "trebleClickDelayMs":
-        self.trebleClickDelayMs = val
-      elif key == "dbusBufferMs":
-        self.dbusButton.setRepeatBufferMs(val)
+      elif intKey == "torchAutoShutOffTimeMs":
+        self.torchAutoShutOffTimeMs = intVal
+      elif intKey == "cameraDisabled":
+        self.cameraDisabled = intVal
+      elif intKey == "longClickDelayMs":
+        self.longClickDelayMs = intVal
+      elif intKey == "doubleClickDelayMs":
+        self.doubleClickDelayMs = intVal
+      elif intKey == "trebleClickDelayMs":
+        self.trebleClickDelayMs = intVal
+      elif intKey == "dbusBufferMs":
+        self.dbusButton.setRepeatBufferMs(intVal)
       elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
         raise Exception("Unparseable config entry: " + line)
