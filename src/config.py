@@ -11,6 +11,7 @@
 #You should have received a copy of the GNU General Public License
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from ledpattern import LedPattern
 from clicktimer import getButtons
 from dbusbtn import DbusButton
 from prxbtn import ProximityButton
@@ -66,6 +67,8 @@ class Config():
     self.cameraDisabled=0
     self.quickSnapShutterSound=CAMERA_SOUND
     self.quickSnapSaveSound=''
+    self.quickSnapShutterLedPattern=LedPattern('blink')
+    self.quickSnapSaveLedPattern=LedPattern('doubleblink')
     self.longClickDelayMs=400
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
@@ -154,6 +157,10 @@ class Config():
         self.quickSnapShutterSound = strVal
       elif strKey == "quickSnapSaveSound":
         self.quickSnapSaveSound = strVal
+      elif strKey == "quickSnapShutterLedPattern":
+        self.quickSnapShutterLedPattern = LedPattern(strVal)
+      elif strKey == "quickSnapSaveLedPattern":
+        self.quickSnapSaveLedPattern = LedPattern(strVal)
       elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
         raise Exception("Unparseable config entry: " + line)
