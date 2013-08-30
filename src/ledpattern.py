@@ -24,9 +24,7 @@ actions = (''
 )
 
 class LedPattern():
-  def __init__(self):
-    self.pattern = []
-  def parse(self, ptrnStr):
+  def __init__(self, ptrnStr):
     self.pattern = []
     for item in ptrnStr.split(','):
       action = self.getAction(item.strip())
@@ -59,9 +57,7 @@ class LedPattern():
     subprocess.call(cmd)
 
 def main():
-  p = LedPattern()
-  p.parse(string.join(sys.argv[1:], ', '));
-  p.fire()
+  LedPattern(string.join(sys.argv[1:], ', ')).fire()
 
 if __name__ == "__main__":
   sys.exit(main())
