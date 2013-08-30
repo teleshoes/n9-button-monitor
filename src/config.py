@@ -20,6 +20,8 @@ import os
 import re
 import subprocess
 
+CAMERA_SOUND = "/usr/share/sounds/ui-tones/snd_camera_shutter.wav"
+
 def getUserConfigFilePath():
   return "/home/user/.config/n9-button-monitor.ini"
 def getSystemConfigFilePath():
@@ -62,6 +64,8 @@ class Config():
   def resetConfig(self):
     self.torchAutoShutOffTimeMs=300000
     self.cameraDisabled=0
+    self.quickSnapShutterSound=CAMERA_SOUND
+    self.quickSnapSaveSound=''
     self.longClickDelayMs=400
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
@@ -146,6 +150,10 @@ class Config():
         self.trebleClickDelayMs = intVal
       elif intKey == "dbusBufferMs":
         self.dbusButton.setRepeatBufferMs(intVal)
+      elif strKey == "quickSnapShutterSound":
+        self.quickSnapShutterSound = strVal
+      elif strKey == "quickSnapSaveSound":
+        self.quickSnapSaveSound = strVal
       elif commentMatch == None and emptyMatch == None:
         print >> sys.stderr, "Unparseable config entry: " + line
         raise Exception("Unparseable config entry: " + line)
