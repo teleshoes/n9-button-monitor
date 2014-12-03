@@ -50,7 +50,7 @@ class Config():
       except:
         print >> sys.stderr, "INVALID CONFIG, ATTEMPTING TO USE DEFAULT"
         self.parse(self.readConf(getSystemConfigFilePath()))
-    self.lastTimeStamp = timestamp 
+    self.lastTimeStamp = timestamp
   def getTimeStamp(self):
     if os.path.isfile(getUserConfigFilePath()):
       cmdArr = ["stat", "-t", getUserConfigFilePath()]
@@ -72,7 +72,7 @@ class Config():
     self.longClickDelayMs=400
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
-    self.dbusButton.setRepeatBufferMs(800)
+    self.dbusButton.setPatternDelayMs(1500)
     self.actionMapSet = ActionMapSet([])
 
 
@@ -151,8 +151,8 @@ class Config():
         self.doubleClickDelayMs = intVal
       elif intKey == "trebleClickDelayMs":
         self.trebleClickDelayMs = intVal
-      elif intKey == "dbusBufferMs":
-        self.dbusButton.setRepeatBufferMs(intVal)
+      elif intKey == "dbusPatternDelayMs":
+        self.dbusButton.setPatternDelayMs(intVal)
       elif strKey == "quickSnapShutterSound":
         self.quickSnapShutterSound = strVal
       elif strKey == "quickSnapSaveSound":

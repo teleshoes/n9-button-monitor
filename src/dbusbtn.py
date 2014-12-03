@@ -41,8 +41,8 @@ class DbusButton():
     print >> sys.stderr, "button: " + button
   def setHandler(self, handler):
     self.handler = handler
-  def setRepeatBufferMs(self, repeatBufferMs):
-    self.repeatBufferMs = repeatBufferMs
+  def setPatternDelayMs(self, patternDelayMs):
+    self.patternDelayMs = patternDelayMs
   def buttonClicked(self, btn):
     self.ensureTimer()
     self.pattern.append(btn)

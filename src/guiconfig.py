@@ -100,13 +100,13 @@ class ConfigPanel(QVBoxLayout):
     self.longClickDelayMsNumBox = NumBox("Long-click Delay (ms): ")
     self.doubleClickDelayMsNumBox = NumBox("Double-click Delay (ms): ")
     self.trebleClickDelayMsNumBox = NumBox("Treble-click Delay (ms): ")
-    self.dbusBufferMsNumBox = NumBox("D-Bus Buffer (ms): ")
+    self.dbusPatternDelayMsNumBox = NumBox("D-Bus Pattern Delay (ms): ")
     self.disableCameraNumBox = NumBox("Disable Camera-based Features (1/0): ")
     self.addLayout(self.torchAutoShutOffTimeMsNumBox)
     self.addLayout(self.longClickDelayMsNumBox)
     self.addLayout(self.doubleClickDelayMsNumBox)
     self.addLayout(self.trebleClickDelayMsNumBox)
-    self.addLayout(self.dbusBufferMsNumBox)
+    self.addLayout(self.dbusPatternDelayMsNumBox)
     self.addLayout(self.disableCameraNumBox)
 
     self.addWidget(self.actionTable.getWidget())
@@ -115,7 +115,7 @@ class ConfigPanel(QVBoxLayout):
     self.longClickDelayMsNumBox.setVal(config.longClickDelayMs)
     self.doubleClickDelayMsNumBox.setVal(config.doubleClickDelayMs)
     self.trebleClickDelayMsNumBox.setVal(config.trebleClickDelayMs)
-    self.dbusBufferMsNumBox.setVal(config.dbusButton.repeatBufferMs)
+    self.dbusPatternDelayMsNumBox.setVal(config.dbusButton.patternDelayMs)
     self.disableCameraNumBox.setVal(config.cameraDisabled)
     self.actionTable.clear()
     for actionMap in config.getActionMapSet().actionMaps:
@@ -133,8 +133,8 @@ class ConfigPanel(QVBoxLayout):
         + str(self.trebleClickDelayMsNumBox.getVal()) + "\n"
       + "cameraDisabled="
         + str(self.disableCameraNumBox.getVal()) + "\n"
-      + "dbusBufferMs="
-        + str(self.dbusBufferMsNumBox.getVal()) + "\n"
+      + "dbusPatternDelayMs="
+        + str(self.dbusPatternDelayMsNumBox.getVal()) + "\n"
       + self.actionTable.formatActionRows()
       )
   def clear(self):
