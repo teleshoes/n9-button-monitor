@@ -40,14 +40,14 @@ class GuiConfig():
     btn = QPushButton(label)
     btn.clicked.connect(clickFunc)
     return btn
-    
+
   def addActionRow(self):
     self.configPanel.actionTable.addRow(None)
   def showGui(self):
     app = QApplication([])
 
     self.configPanel.initUI()
-    
+
     mainPanel = QVBoxLayout()
     mainPanel.addLayout(self.createButtonPanel())
     mainPanel.addLayout(self.configPanel)
@@ -81,13 +81,13 @@ class GuiConfig():
       raise
     else:
       self.configPanel.applyConfig(self.config)
-  
+
   def saveConfig(self):
     confText = self.configPanel.makeConfigText()
     self.loadConfig(confText)
     open(getUserConfigFilePath(), 'w').write(confText)
-    
-    
+
+
 class ConfigPanel(QVBoxLayout):
   def __init__(self, actionDict):
     QVBoxLayout.__init__(self)
@@ -203,7 +203,6 @@ class ActionTable():
     for actionRow in self.actionRows:
       str += actionRow.format()
     return str
-      
 
 class ActionRow():
   def __init__(self, actionDict):
@@ -268,13 +267,13 @@ class ActionRow():
       actionParam = "(" + actionParam + ")"
     else:
       actionParam = ""
-    
+
     conditionParam = self.conditionParamBox.text()
     if conditionParam != None and len(conditionParam) > 0:
       conditionParam = "(" + conditionParam + ")"
     else:
       conditionParam = ""
-    
+
     return ("action="
       + self.actionName + actionParam + ","
       + self.button + buttonParam + ","

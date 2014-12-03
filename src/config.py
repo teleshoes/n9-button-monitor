@@ -201,7 +201,7 @@ class ActionMapSet():
       return []
     else:
       return self.actionMapsByKeyByClickType[clickType][key]
-    
+
 class ActionMap():
   def __init__(self, actionDict,
                actionName, actionParam,
@@ -215,7 +215,7 @@ class ActionMap():
     self.buttonParam = buttonParam
     self.key = getButtons()[button]
     self.clickType = clickType
-    
+
     self.actionLambda = self.getLambda(actionDict.getActionLambdaDict(),
       self.actionName, self.actionParam)
     self.condLambda = self.getLambda(actionDict.getConditionLambdaDict(),
@@ -245,4 +245,3 @@ class ActionMap():
     return lam
   def isLambda(self, v):
     return isinstance(v, type(lambda: None)) and v.__name__ == '<lambda>'
-
