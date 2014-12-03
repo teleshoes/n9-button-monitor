@@ -32,6 +32,11 @@ class DbusButton():
     self.patternDelayMs = 1500
     self.pattern = []
     self.handler = self.defaultHandler
+    self.buttonSyns = dict()
+  def addButtonSyn(self, buttonSyn, buttonName):
+    self.buttonSyns[buttonSyn] = buttonName
+  def clearButtonSyns(self):
+    self.buttonSyns = dict()
   def ensureTimer(self):
     if self.delayedHandlerTimer != None:
       self.delayedHandlerTimer.cancel()
@@ -44,6 +49,8 @@ class DbusButton():
   def setPatternDelayMs(self, patternDelayMs):
     self.patternDelayMs = patternDelayMs
   def buttonClicked(self, btn):
+    if btn in self.buttonSyns:
+      btn = self.buttonSyns[btn]
     self.ensureTimer()
     self.pattern.append(btn)
     self.delayedHandlerTimer.start()
