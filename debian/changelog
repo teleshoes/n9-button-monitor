@@ -1,3 +1,8 @@
+n9-button-monitor (0.5.6) unstable; urgency=low
+  * Add support for patterns in DBUS buttons
+  * Add support for DBUS button synonyms
+ -- teleshoes <elliot.wolk@gmail.com>  Wed, 03 Dec 2014 15:34:26 -0500
+
 n9-button-monitor (0.5.5) unstable; urgency=low
   * Add separate config entries for quick-snap shutter and save sound
   * Add LED dbus daemon for firing off LED event changes
