@@ -48,7 +48,7 @@ class DbusButton():
     self.pattern.append(btn)
     self.delayedHandlerTimer.start()
   def delayedHandler(self):
-    btn = ",".join(self.pattern)
+    btn = ",".join(removeAdjDupes(self.pattern))
     self.pattern = []
     self.handler(btn)
   def connectButtonDbus(self):
@@ -63,6 +63,16 @@ class DbusButton():
 
     iface.connect_to_signal(self.member,
       lambda cond, arg: self.buttonClicked(arg))
+
+def removeAdjDupes(arr):
+  arr = list(arr)
+  newArr = list()
+  while len(arr) > 0:
+    x = arr[0]
+    newArr.append(x)
+    while len(arr) > 0 and arr[0] == x:
+      arr.pop(0)
+  return newArr
 
 if __name__ == '__main__':
   app = QCoreApplication([])
