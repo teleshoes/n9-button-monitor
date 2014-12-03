@@ -73,6 +73,7 @@ class Config():
     self.doubleClickDelayMs=400
     self.trebleClickDelayMs=600
     self.dbusButton.setPatternDelayMs(1500)
+    self.dbusButton.clearButtonSyns()
     self.actionMapSet = ActionMapSet([])
 
 
@@ -99,6 +100,14 @@ class Config():
       + "\\s*(#.*)?"
       + "$"
       )
+    self.dbusButtonSynRe = re.compile(""
+      + "^"
+      + "\\s*dbusButtonSyn\\s*=\\s*"
+      + "(?P<syn>[a-zA-Z0-9_\\-]+)"
+      + "\\s*(?:=>|,|->)\\s*"
+      + "(?P<target>[a-zA-Z0-9_\\-]+)"
+      + "$"
+      )
   def readConf(self, confFile):
     if os.path.isfile(confFile):
       return open(confFile,"rb").read()
@@ -117,6 +126,7 @@ class Config():
     actionMaps = []
     for line in confText.splitlines():
       actionMapMatch = self.actionMapRe.match(line)
+      dbusButtonSynMatch = self.dbusButtonSynRe.match(line)
       intMatch = self.intRe.match(line)
       strMatch = self.strRe.match(line)
       commentMatch = self.commentRe.match(line)
@@ -141,6 +151,9 @@ class Config():
           buttonParam = actionMapMatch.group("buttonParam"),
           clickType = actionMapMatch.group("clickType"),
         ))
+      elif dbusButtonSynMatch != None:
+        self.dbusButton.addButtonSyn(
+          dbusButtonSynMatch.group("syn"), dbusButtonSynMatch.group("target"))
       elif intKey == "torchAutoShutOffTimeMs":
         self.torchAutoShutOffTimeMs = intVal
       elif intKey == "cameraDisabled":
