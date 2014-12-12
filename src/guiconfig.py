@@ -254,7 +254,7 @@ class ActionRow():
     self.actionName = self.actionNameBox.itemText(index)
   def setConditionNameIndex(self, index):
     self.conditionName = self.conditionNameBox.itemText(index)
-  
+
   def format(self):
     buttonParam = self.buttonParamBox.text()
     if buttonParam != None and len(buttonParam) > 0:
