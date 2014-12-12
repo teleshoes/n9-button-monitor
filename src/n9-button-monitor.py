@@ -48,11 +48,13 @@ def main():
     return 0
 
 def dbusBtnClicked(config, button):
+  config.checkConfigFile()
   actionMaps = config.getActionMapSet()
   for a in actionMaps.getActionMapsForKey("dbusMessage", button):
     a.maybeRun()
 
 def prxBtnClicked(config, state):
+  config.checkConfigFile()
   actionMaps = config.getActionMapSet()
   for a in actionMaps.getActionMapsForKey("proximitySensor", state):
     a.maybeRun()
