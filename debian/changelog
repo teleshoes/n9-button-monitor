@@ -1,3 +1,7 @@
+n9-button-monitor (0.5.7) unstable; urgency=low
+  * refresh config file on proximity/dbus buttons
+ -- teleshoes <elliot.wolk@gmail.com>  Fri, 12 Dec 2014 17:08:22 -0500
+
 n9-button-monitor (0.5.6) unstable; urgency=low
   * Add support for patterns in DBUS buttons
   * Add support for DBUS button synonyms
